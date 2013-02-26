@@ -1,0 +1,1 @@
+data-lightbox="transitionIn:elastic;transitionOut:elastic;"
