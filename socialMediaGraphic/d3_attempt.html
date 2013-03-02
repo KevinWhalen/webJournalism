@@ -12,16 +12,18 @@
 <script type="text/javascript" src="d3/d3.v3.min.js"></script>
 <script type="text/javascript" src="scripts/colorbrewer.js"></script>
 <script type="text/javascript" src="scripts/toggleVisibility.js"></script>
-<script type="text/javascript" src="scripts/frame.js"></script>
+<script type="text/javascript" src="scripts/frame.js">//initiateGraphic</script>
 
 <title>Social Media Graphic</title>
 </head>
 <body>
 
-<div id="graphic">
+<div id="graphic" style="width:800px; height:600px; border-style:dotted;">
 <script>
-	initiateGraphic();
-	createMediaCircles();
+	// initiateGraphic with or without a defined width,height pair
+	initiateGraphic(600,200);
+//	initiateGraphic();
+	interactionMovements();
 </script>
 </div>
 

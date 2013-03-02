@@ -3,52 +3,95 @@
  * 2/17/13
 */
 
-function initiateGraphic()
+//function initiateGraphic(w = 960, h = 600)
+function initiateGraphic(w,h)
 {
+// variables. coordinates origin is upper left.
+	var frameWidth = w;
+	var frameHeight = h;
+	var barOffsetX = frameWidth * 0.05;
+	var barOffsetY = frameHeight * 0.49;
+	var barThickness = 10;// scale by height
+
+
 	// container
 	var svg = d3.select("body").append("svg")
 		.attr("id", "mainSVG")
-		.attr("width", 960)
-		.attr("height", 600);
+		.attr("width", frameWidth)
+		.attr("height", frameHeight)
+		.style("border-style", "solid")
+		.style("border-color", "black");
+/*
+		.attr("stroke-width", 2)
+
+	.on("mouseover", function(d,i){
+		d3.select(this).attr("stroke-width", 4);
+	})
+	.on("mouseout", function(d,i){
+		d3.select(this).attr("stroke-width", 1);
+	}) 
+	.on("click", function(d,i){
+	})
+	.append("title").text("some mouse over title text");
+*/
 
 	// center bar
 	svg.append("rect")
-		.attr("width", 800)
-		.attr("height", 15)
-		.attr("x", 50)
-		.attr("y", 300)
+		.attr("width", (frameWidth * 0.88))
+		.attr("height", barThickness)
+		.attr("x", barOffsetX)
+		.attr("y", barOffsetY)
 		.attr("id", "centerBar")
 		.style("z-index", 1)
 		.attr("fill", "dodgerblue");
 
-}
 
-function createMediaCircles()
-{
+// Create Media Circles
+
 // interpolate between center bar width
 // ----------------
 
 	// container already created with id
 	var svg = d3.select("#mainSVG");
 
-	// media site title bubbles
-	var titleData = [{"name": "Facebook", "rating": 150, "color": "blue"},
-						{"name": "YouTube", "rating": -70, "color": "red"},
-						{"name": "Twitter", "rating": 40, "color": "green"}];
+	// Data from journalist research.
+	// name = name of website
+	// icon = displayed circle (SVG file)
+	// category = 3 defined (0,1,2)
+	//		shape = displayed representation of category (needed?) (tri,sq, dia
+	//		rating = designation from -5 through 5
+	//		text = write up on 'category' for 'title'
+// 9-class Blues sequential color scheme
+//247, 251, 255; 222, 235, 247; 198, 219, 239; 158, 202, 225; 107, 174, 214; 66, 146, 198; 33, 113, 181; 8, 81, 156; 8, 48, 107; 
+	var titleData = [{"name": "Facebook", "rating": 5, "color": "blue"},
+						{"name": "YouTube", "rating": -3, "color": "red"},
+						{"name": "Twitter", "rating": 4, "color": "green"}];
 /*
 						{"name": "Google+", "w": 50, "h": 30, "color": "red"},
 						{"name": "Tumbler", "w": 50, "h": 30, "color": "red"},
 						{"name": "Reddit", "w": 50, "h": 30, "color": "red"},
 */
+/*
 	var titleCount = Object.keys(titleData).length;
+	var numTitles = 0;
+	titleData.foreach(name as n){
+		++numTitles;
+	}
+document.write(numTitles);
+*/
 
+	// center of the graph
+	var centerY = (barOffsetY + (barThickness / 2));
+
+	// media site title bubbles
 	var titles = svg.selectAll("ellipse");
 //group first
 	titles.data(titleData)
 		//.datum?
 		.enter().append("ellipse")
-		.attr("cx", 50)
-		.attr("cy", 307)
+		.attr("cx", barOffsetX)
+		.attr("cy", centerY)
+			//scale the icons here
 		.attr("rx", 50)
 		.attr("ry", 30)
 		.attr("fill", function(d,i){
@@ -62,17 +105,19 @@ function createMediaCircles()
 //		.style("display", "none");
 
 //	titles.data(titleData)
-		.transition()
+		.transition() // move from right out across bar
 		.delay(200)//on event?
 		.duration(2500)
 		.attr("cx", function(d,i){
 			return 180 + (260 * i);
 		})
-		.transition()
+// this transition will be on the category objects
+		.transition() // move to rating vertical position
 		.delay(3000)
 		.duration(2500)
 		.attr("cy", function(d,i){
-			return (307 - d["rating"]);
+			//var position = 
+			return (center - d["rating"]);
 		});
 /*
 	titleData.forEach(function(d){
@@ -89,14 +134,10 @@ function createMediaCircles()
 	});
 */
 
-	// outer hover-zone per media site
-	var hover = svg.selectAll("rect");
-//	hover.data(titleCount);
-
 
 	// articles per media site 
 //data format??
-	var articles = svg.selectAll
+	//var articles = svg.selectAll
 
 
 /*
