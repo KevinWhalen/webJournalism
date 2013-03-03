@@ -1,28 +1,44 @@
 /* frame.js
  * 
+ * Kevin Whalen
  * 2/17/13
 */
 
-//function initiateGraphic(w = 960, h = 600)
-function initiateGraphic(w,h)
+function initiateGraphic(w = 800, h = 400)
 {
 // variables. coordinates origin is upper left.
 	var frameWidth = w;
 	var frameHeight = h;
 	var barOffsetX = frameWidth * 0.05;
 	var barOffsetY = frameHeight * 0.49;
-	var barThickness = 10;// scale by height
+	var barThickness = frameHeight * 0.015;// scale by height
+// 9-class Blues sequential color scheme
+//247, 251, 255; 222, 235, 247; 198, 219, 239; 158, 202, 225; 107, 174, 214; 66, 146, 198; 33, 113, 181; 8, 81, 156; 8, 48, 107; 
 
 
 	// container
-	var svg = d3.select("body").append("svg")
+	var svg = d3.select("body").select("#graphicRegion").append("svg")
 		.attr("id", "mainSVG")
 		.attr("width", frameWidth)
 		.attr("height", frameHeight)
+		.attr("stroke", "black")
+		.attr("stroke-width", 0)
+		// transition graphic
+		.on("mouseover", function(d,i){
+			animateGraphic();
+//			d3.select(this).attr("stroke-width", 4);
+		})
+		// transition back to starting state
+		.on("mouseout", function(d,i){
+			reverseGraphic();
+//			d3.select(this).attr("stroke-width", 1);
+		}) 
+		.style("margin-left", "auto")
+		.style("margin-right", "auto")
+		.style("border-width", 0.2 + "em")
 		.style("border-style", "solid")
 		.style("border-color", "black");
 /*
-		.attr("stroke-width", 2)
 
 	.on("mouseover", function(d,i){
 		d3.select(this).attr("stroke-width", 4);
@@ -61,8 +77,6 @@ function initiateGraphic(w,h)
 	//		shape = displayed representation of category (needed?) (tri,sq, dia
 	//		rating = designation from -5 through 5
 	//		text = write up on 'category' for 'title'
-// 9-class Blues sequential color scheme
-//247, 251, 255; 222, 235, 247; 198, 219, 239; 158, 202, 225; 107, 174, 214; 66, 146, 198; 33, 113, 181; 8, 81, 156; 8, 48, 107; 
 	var titleData = [{"name": "Facebook", "rating": 5, "color": "blue"},
 						{"name": "YouTube", "rating": -3, "color": "red"},
 						{"name": "Twitter", "rating": 4, "color": "green"}];
@@ -71,13 +85,18 @@ function initiateGraphic(w,h)
 						{"name": "Tumbler", "w": 50, "h": 30, "color": "red"},
 						{"name": "Reddit", "w": 50, "h": 30, "color": "red"},
 */
-/*
 	var titleCount = Object.keys(titleData).length;
 	var numTitles = 0;
-	titleData.foreach(name as n){
+/*
+	for (idx in titleData){
 		++numTitles;
 	}
-document.write(numTitles);
+document.write("<br />" + numTitles);
+numTitles = 0;
+	titleData.forEach(function(d,i,a){
+		++numTitles;
+	});
+document.write("<br />" + numTitles);
 */
 
 	// center of the graph
@@ -92,8 +111,8 @@ document.write(numTitles);
 		.attr("cx", barOffsetX)
 		.attr("cy", centerY)
 			//scale the icons here
-		.attr("rx", 50)
-		.attr("ry", 30)
+		.attr("rx", 40)
+		.attr("ry", 25)
 		.attr("fill", function(d,i){
 			return d["color"];
 		})
@@ -117,7 +136,7 @@ document.write(numTitles);
 		.duration(2500)
 		.attr("cy", function(d,i){
 			//var position = 
-			return (center - d["rating"]);
+			return (centerY - d["rating"]);
 		});
 /*
 	titleData.forEach(function(d){
@@ -157,4 +176,18 @@ document.write(numTitles);
 	.append("title").text("some mouse over title text")
 */
 
+}
+
+
+function animateGraphic()
+{
+//	d3.select("#mainSVG");
+document.getElementById("testP").innerHTML = "tranisition to";
+}
+
+
+function reverseGraphic()
+{
+//	d3.select("#mainSVG");
+document.getElementById("testP").innerHTML = "tranisition from";
 }
