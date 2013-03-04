@@ -9,23 +9,47 @@
 <meta name="robots" content="noindex, nofollow" />
 <meta name="author" content="Kevin Whalen" />
 
+<!------------------  Required Scripts  ------------------>
 <script type="text/javascript" src="d3/d3.v3.min.js"></script>
 <script type="text/javascript" src="scripts/colorbrewer.js"></script>
 <script type="text/javascript" src="scripts/toggleVisibility.js"></script>
-<script type="text/javascript" src="scripts/frame.js">//initiateGraphic</script>
+<script type="text/javascript" src="scripts/frame.js"></script>
+<!--script type="text/javascript" src="scripts/initiateSocialGraphic.js">
+// initiate the social media ratings graphic</script>
+<script type="text/javascript" src="scripts/animateSocialGraphic.js">
+// mouse over animations</script>
+<script type="text/javascript" src="scripts/reverseSocialGraphic.js">
+// mouse out return original state animations</script-->
+<!------------------  ------------------>
 
 <title>Social Media Graphic</title>
 </head>
 <body>
 
-<div id="graphic" style="width:800px; height:600px; border-style:dotted;">
-<script>
-	// initiateGraphic with or without a defined width,height pair
-	initiateGraphic(600,200);
-//	initiateGraphic();
-	interactionMovements();
+<!------------------  Grapic Code  ------------------>
+<div id="graphicRegion" style="width:80%; height:550px; border-style:dotted;
+		margin-left:5%; padding-left:5%; padding-right:5%;">
+	<!------------------  Article  ------------------>
+	<div id="graphicArticle" style="width:80%; height:100px; 
+			border-style:dashed; margin-left:auto; margin-right:auto;">
+		<p>
+		asdf.
+		</p>
+	</div>
+	<!------------------  ------------------>
+<script type="text/javascript">
+	var width = window.innerWidth * 0.77;
+	var height = width * 0.50; // window.innerHeight
+	// initiateGraphic with or without a defined (width,height) pair
+	initiateGraphic(width, height);
 </script>
+
+<div id="testOutput">
+<p id="testP">asdf</p>
 </div>
+
+</div>
+<!------------------  ------------------>
 
 </body>
 </html>
