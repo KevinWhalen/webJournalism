@@ -64,7 +64,7 @@ document.write("<br />" + numTitles);
 		})
 		// transition back to starting state
 		.on("mouseout", function(d,i){
-			reverseGraphic();
+			reverseGraphic(barOffsetX);
 		}) 
 		.style("margin-left", "auto")
 		.style("margin-right", "auto")
@@ -127,8 +127,8 @@ document.write("<br />" + numTitles);
 			.append("g")
 			.attr("id", d["name"] + "_Group");
 //		d3.select("#" + d["name"] + "_Group")
-			.append("text")
-			.attr("x", function(d,i){
+			.append("d["category"]["shape"]")
+			.attr("x", function(){
 				return 150 + (250 * i);
 			})
 			.attr("y", 307)
@@ -174,7 +174,7 @@ function animateGraphic(barLength, barOffsetX, titleCount)
 	// interpolate between center bar width and leave ends exposed
 	window.titleData.forEach(function(d,i,a){
 		d3.select("#title_" + d["name"])
-			.transition() // move from right out across bar
+			.transition() // move from left out across bar
 			.delay(200)
 			.duration(2500)
 			.attr("cx", function(){
@@ -205,9 +205,32 @@ document.getElementById("testP").innerHTML = "tranisition to";
 }
 
 
-function reverseGraphic()
+function reverseGraphic(barOffsetX)
 {
-//	d3.select("#mainSVG");
+	// return to starting positions
+	window.titleData.forEach(function(d,i,a){
+		// collapse category shapes
+/*
+	// this transition will be on the category objects
+		//d["category"].forEach(function(d,i,a){});
+		//select("#category_" + d["category"]["
+			.transition() // move to rating vertical position
+			.delay(3000)
+			.duration(2500)
+			.attr("cy", function(d,i){
+				//var position = 
+				return (centerY - d["rating"]);
+			});
+*/
+		// collapse title icons
+		d3.select("#title_" + d["name"])
+			.transition()
+			.delay(200)
+			.duration(2500)
+			.attr("cx", function(){
+				return barOffsetX;
+			});
+	});
 
 document.getElementById("testP").innerHTML = "tranisition from";
 }
