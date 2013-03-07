@@ -7,6 +7,7 @@
 */
 
 // Scaled to width and height. The graphic is balanced for a 2:1 ratio of w:h.
+//function initiateGraphic(w = 800, h = 400, global data object)
 function initiateGraphic(w = 800, h = 400)
 {
 // variables. coordinates origin is upper left.
@@ -16,8 +17,24 @@ function initiateGraphic(w = 800, h = 400)
 	var barOffsetY = frameHeight * 0.49;
 	var barLength = frameWidth * 0.88;
 	var barThickness = frameHeight * 0.015;
+
+	// icon diameter for width/height and such
+	var iconDiameter = frameHeight * 0.15;
+
+/*	var color = d3.scale.quantize()
+			.domain([-5,5])
+			.range(["rgb(#,#,#)", ""]); // needs 11 colors
+// or
+	var color = d3.scale.linear()
+		.domain([-5,5])
+		.range(["#7A8F9D","#D1DBE8"]) // needs 2 colors
+		.interpolate(d3.interpolateHcl);
+// or maybe use saturation?
+*/
 // 9-class Blues sequential color scheme
 //247, 251, 255; 222, 235, 247; 198, 219, 239; 158, 202, 225; 107, 174, 214; 66, 146, 198; 33, 113, 181; 8, 81, 156; 8, 48, 107; 
+// example:
+// var fillColor = color(-4.5); // = -5 = lowest color in range.
 
 //--------------------------------------------------------------------
 	// Data from journalist research.
@@ -27,15 +44,65 @@ function initiateGraphic(w = 800, h = 400)
 	//		shape = displayed representation of category (needed?) (tri,sq, dia
 	//		rating = designation from -5 through 5
 	//		text = write up on 'category' for 'title'
-	window.titleData = [{"name": "Facebook", "rating": 5, "color": "blue"},
-						{"name": "YouTube", "rating": -3, "color": "red"},
-						{"name": "Reddit", "rating": -1, "color": "yellow"},
-						{"name": "Google", "rating": 3, "color": "purple"},
-						{"name": "Tumbler", "rating": 2, "color": "orange"},
-						{"name": "Twitter", "rating": 4, "color": "green"}];
+
+// Will be insterted into a script in the html page as a global/window object.
+// Instead of d3.json to avoid an asynchronous load here.
+	window.researchData = 
+[
+	{"name": "Facebook", "icon": "images/icons/facebook.svg", "category":
+		[
+		{"shape": "circle", "rating": 5, "text": "test text facebook circle"},
+		{"shape": "rect", "rating": -2, "text": "test text facebook rectangle"},
+		{"shape": "ellipse", "rating": 4, "text": "test text facebooke ellipse"}
+		]
+	},
+	{"name": "YouTube", "icon": "images/icons/youtube.svg", "category":
+		[
+		{"shape": "circle", "rating": -3, "text": "test text circle"},
+		{"shape": "rect", "rating": -2, "text": "test text rectangle"},
+		{"shape": "ellipse", "rating": 4, "text": "test text ellipse"}
+		]
+	},
+	{"name": "Twitter", "icon": "images/icons/twitter.svg", "category":
+		[
+		{"shape": "circle", "rating": -3, "text": "test text circle"},
+		{"shape": "rect", "rating": 5, "text": "test text rectangle"},
+		{"shape": "ellipse", "rating": 4, "text": "test text ellipse"}
+		]
+	},
+	{"name": "Pinterest", "icon": "images/icons/pinterest.svg", "category":
+		[
+		{"shape": "circle", "rating": 3, "text": "test text circle"},
+		{"shape": "rect", "rating": -2, "text": "test text rectangle"},
+		{"shape": "ellipse", "rating": 4, "text": "test text ellipse"}
+		]
+	},
+	{"name": "Tumblr", "icon": "images/icons/tumblr.svg", "category":
+		[
+		{"shape": "circle", "rating": -3, "text": "test text circle"},
+		{"shape": "rect", "rating": 5, "text": "test text rectangle"},
+		{"shape": "ellipse", "rating": 4, "text": "test text ellipse"}
+		]
+	},
+	{"name": "Reddit", "icon": "images/icons/reddit.svg", "category":
+		[
+		{"shape": "circle", "rating": -3, "text": "test text circle"},
+		{"shape": "rect", "rating": 5, "text": "test text rectangle"},
+		{"shape": "ellipse", "rating": 4, "text": "test text ellipse"}
+		]
+	},
+	{"name": "WordPress", "icon": "images/icons/wordpress.svg", "category":
+		[
+		{"shape": "circle", "rating": -3, "text": "test text circle"},
+		{"shape": "rect", "rating": 5, "text": "test text rectangle"},
+		{"shape": "ellipse", "rating": 4, "text": "test text ellipse"}
+		]
+	}
+];
 //--------------------------------------------------------------------
 
-	var titleData = window.titleData;
+//	var titleData = window.researchData; // global data object will be from page
+	var titleData = window.researchData;
 	var titleCount = Object.keys(titleData).length;
 /* counting stuff
 	var numTitles = 0;
@@ -53,6 +120,8 @@ document.write("<br />" + numTitles);
 
 	// container
 	var svg = d3.select("body").select("#graphicRegion").append("svg")
+		.attr("xmlns", "http://www.w3.org/2000/svg")
+		.attr("xlink", "http://www.w3.org/1999/xlink")
 		.attr("id", "mainSVG")
 		.attr("width", frameWidth)
 		.attr("height", frameHeight)
@@ -60,12 +129,13 @@ document.write("<br />" + numTitles);
 		.attr("stroke-width", 0)
 		// transition graphic
 		.on("mouseover", function(d,i){
-			animateGraphic(barLength, barOffsetX, titleCount);
+			animateGraphic(barLength, (barOffsetX - (iconDiameter / 2)), titleCount);
 		})
 		// transition back to starting state
 		.on("mouseout", function(d,i){
-			reverseGraphic(barOffsetX);
+			reverseGraphic((barOffsetX - (iconDiameter / 2)));
 		}) 
+		.style("z-index", 1)
 		.style("margin-left", "auto")
 		.style("margin-right", "auto")
 		.style("border-width", 0.2 + "em")
@@ -84,62 +154,86 @@ document.write("<br />" + numTitles);
 		.attr("x", barOffsetX)
 		.attr("y", barOffsetY)
 		.attr("id", "centerBar")
-		.style("z-index", 1)
-		.attr("fill", "dodgerblue");
+		.style("z-index", 2)
+		//.attr("fill", "#829CAB");
+		.attr("fill", "#BDDCA2");
 
 
-// Create Media Circles
-
-	// container already created with id. (more direct selection)
-	var svg = d3.select("#mainSVG");
+//---------------------------------------------------------------------------
+// Media Title Circles
+// Still here because of variable scope.
 
 	// center of the graph
 	var centerY = (barOffsetY + (barThickness / 2));
 
-// Would move over to a mouse over call, but 
-// then it would lose scope of variables.
+	// container already created with id. (more direct selection?)
+	var svg = d3.select("#mainSVG");
 
 	// media site title bubbles
-	var titles = svg.selectAll("ellipse");
-//group first
-	titles.data(titleData)
-		//.datum?
-		.enter().append("ellipse")
-		.attr("cx", barOffsetX)
-		.attr("cy", centerY)
-			//scale the icons here
-		.attr("rx", 40)
-		.attr("ry", 25)
-		.attr("fill", function(d,i){
-			return d["color"];
-		})
-		.attr("id", function(d,i){
-			return "title_" + d["name"];
-		})
-		.style("z-index", 100);
+titleData.forEach(function(d,i,a){
+	// add container groups for each website
+	svg.append("g").attr("id", "g_" + d["name"]);
 
+	// async?
+	// insert SVG image files as XML
+	d3.xml(d["icon"], "image/svg+xml", function(error,xml) {
+		// inner XML IDs: svg_name, group_name, img_name
+	document.getElementById("g_" + d["name"]).appendChild(xml.documentElement);
+
+		// if async, might have to move groupings and articles here
+		// size and location
+		 svg.select("#svg_" + d["name"])
+			// svg location in a svg is center based
+			.attr("x", barOffsetX - (iconDiameter / 2))
+			.attr("y", centerY - (iconDiameter / 2));
+		 svg.select("#img_" + d["name"])
+			.attr("xlink:title", d["name"])
+			.attr("width", iconDiameter)
+			.attr("height", iconDiameter);
+//			.on("click", );
+	});
+});
+
+/*
+	// media site title bubbles
+	var titles = svg.selectAll("ellipse");
+	titles.data(titleData)
+		.enter().append("ellipse")
+*/
+//---------------------------------------------------------------------------
 
 	// articles per media site 
 	//var articles = svg.selectAll
-/*
+
 	titleData.forEach(function(d,i,a){
-		d3.select("#" + d["name"])
-			.append("g")
-			.attr("id", d["name"] + "_Group");
-//		d3.select("#" + d["name"] + "_Group")
-			.append("d["category"]["shape"]")
-			.attr("x", function(){
-				return 150 + (250 * i);
-			})
-			.attr("y", 307)
-			//.attr("text-anchor", "middle")
-			.style("z-index", 101)
-			.text(function(d,i){ d["name"] });
+		d3.select("#g_" + d["name"])
+//			.append(d["category"]["shape"])
+			.append("rect")
+			.attr("width", 25)
+			.attr("height", 25)
+			.attr("x", barOffsetX + (35 * i))
+			.attr("y", 120)
+			.attr("id", "rect_" + d["name"])
+			.attr("fill", "dodgerblue")
+//			.attr("text-anchor", "middle")
+			.style("z-index", 101);
+//			.text(function(d,i){ d["name"] });
 	});
-*/
+
 
 
 /*
+		d3.select("#" + name + "LinkGroup").append("a")
+			.attr("xlink:href", fileList[i] + "?state=" +
+				name + "&date=" + window.YM)
+			.attr("xlink:title", "Click to open a new visualization.")
+			.attr("xlink:show", "new")
+			.append("text")
+				.attr("x", Hoffset)
+				.attr("y", Voffset + (i * 20))
+				.text(nameList[i]);
+
+
 			.append("text")
 			.attr("x", function(d,i){
 				return 150 + (250 * i);
@@ -172,12 +266,12 @@ document.write("<br />" + numTitles);
 function animateGraphic(barLength, barOffsetX, titleCount)
 {
 	// interpolate between center bar width and leave ends exposed
-	window.titleData.forEach(function(d,i,a){
-		d3.select("#title_" + d["name"])
+	window.researchData.forEach(function(d,i,a){
+		d3.select("#svg_" + d["name"])
 			.transition() // move from left out across bar
 			.delay(200)
 			.duration(2500)
-			.attr("cx", function(){
+			.attr("x", function(){
 			// Written to allow for a variable number of sites, but 
 			// doesnt account for diameter of icons.
 			var offset = barLength * 0.10;
@@ -189,6 +283,7 @@ function animateGraphic(barLength, barOffsetX, titleCount)
 			});
 /*
 	// this transition will be on the category objects
+		//select group_
 		//d["category"].forEach(function(d,i,a){});
 		//select("#category_" + d["category"]["
 			.transition() // move to rating vertical position
@@ -208,7 +303,7 @@ document.getElementById("testP").innerHTML = "tranisition to";
 function reverseGraphic(barOffsetX)
 {
 	// return to starting positions
-	window.titleData.forEach(function(d,i,a){
+	window.researchData.forEach(function(d,i,a){
 		// collapse category shapes
 /*
 	// this transition will be on the category objects
@@ -223,11 +318,11 @@ function reverseGraphic(barOffsetX)
 			});
 */
 		// collapse title icons
-		d3.select("#title_" + d["name"])
+		d3.select("#svg_" + d["name"])
 			.transition()
 			.delay(200)
 			.duration(2500)
-			.attr("cx", function(){
+			.attr("x", function(){
 				return barOffsetX;
 			});
 	});
