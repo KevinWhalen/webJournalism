@@ -21,6 +21,10 @@ function initiateGraphic(w = 800, h = 400)
 
 	// icon diameter for width/height and such
 	var iconDiameter = frameHeight * 0.15;
+
+	// center of the graph
+	var centerY = (barOffsetY + (barThickness / 2));
+
 /*
 	// scale rating to value inside height (top-down, 0 to frameHeight)
 	var chartRating = d3.scale.linear()
@@ -158,11 +162,11 @@ document.write("<br />" + numTitles);
 		.attr("stroke-width", 0)
 		// transition graphic
 		.on("mouseover", function(d,i){
-			animateGraphic(barLength, (barOffsetX - (iconDiameter / 2)), titleCount);
+			animateGraphic(barLength, (barOffsetX - (iconDiameter / 2)), titleCount), centerY;
 		})
 		// transition back to starting state
 		.on("mouseout", function(d,i){
-			reverseGraphic((barOffsetX - (iconDiameter / 2)));
+			reverseGraphic((barOffsetX - (iconDiameter / 2)), centerY);
 		}) 
 		.style("z-index", 1)
 		.style("margin-left", "auto")
@@ -191,9 +195,6 @@ document.write("<br />" + numTitles);
 //---------------------------------------------------------------------------
 // Media Title Circles
 // Still here because of variable scope.
-
-	// center of the graph
-	var centerY = (barOffsetY + (barThickness / 2));
 
 	// container already created with id. (more direct selection?)
 	var svg = d3.select("#mainSVG");
@@ -235,13 +236,12 @@ titleData.forEach(function(d,i,a){
 
 	titleData.forEach(function(d,i,a){
     d["category"].forEach(function(s){
-//      d3.xml(s["file"], "image/svg+xml", function(error,xml){
-//	document.getElementById("g_" + d["name"]).appendChild(xml.documentElement);
+      d3.xml(s["file"], "image/svg+xml", function(error,xml){
+	document.getElementById("g_" + d["name"]).appendChild(xml.documentElement);
 
 // set new id
-//document.getElementById("svg_" + s["shape"]).id = d["name"] + "_" + s["shape"];
+document.getElementById("svg_" + s["shape"]).id = d["name"] + "_" + s["shape"];
 
-/*
 		 //svg.select(d["name"] + "_" + s["shape"])
 		 svg.select("svg_" + s["shape"])
       .attr("id", d["name"] + "_" + s["shape"])
@@ -254,7 +254,7 @@ titleData.forEach(function(d,i,a){
 			.attr("width", (iconDiameter * 0.65))
 			.attr("height", (iconDiameter * 0.65));
 
-*/
+/*
       d3.select("#g_" + d["name"])
   //			.append(d["category"]["shape"])
         .append("rect")
@@ -268,7 +268,8 @@ titleData.forEach(function(d,i,a){
         .style("z-index", 101);
   //			.text(function(d,i){ d["name"] });
 
-//      });
+*/
+      });
     });
   });
 
@@ -315,7 +316,7 @@ titleData.forEach(function(d,i,a){
 }
 
 
-function animateGraphic(barLength, barOffsetX, titleCount)
+function animateGraphic(barLength, barOffsetX, titleCount, centerY)
 {
 	// interpolate between center bar width and leave ends exposed
 	window.researchData.forEach(function(d,i,a){
@@ -355,7 +356,7 @@ document.getElementById("testP").innerHTML = "tranisition to";
 }
 
 
-function reverseGraphic(barOffsetX)
+function reverseGraphic(barOffsetX, centerY)
 {
 	// return to starting positions
 	window.researchData.forEach(function(d,i,a){
