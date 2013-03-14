@@ -1,0 +1,46 @@
+
+--  To Do List  -----------------------------------------------------
+
+add category shapes.
+
+scale/map ratings to frame height positions. (frameHeight)
+
+	transition category shapes and their reverse transitions.
+
+established colors to be used in scale.
+
+	map ratings to color scale for category shape fill colors.
+
+
+export data to report/research JSON file.
+
+add import report data.
+
+refactor titleData variable.
+
+
+icons start as hidden.
+
+	display icons on mouse over then transition.
+
+	hide icons after tranisition on mouse out.
+
+
+lightbox "title - category - rating\n write up"
+
+	lightbox data: organization and source location?
+
+
+
+--  OLD/Completed  -----------------------------------------------------
+
+2013-03-02 : scalable SVG frame and center bar.
+
+2013-03-03 : scale title icon spacing.
+
+2013-03-03 : create reverse transitions for title icons.
+
+2013-03-06 : swap in icons for ellipses.
+
+2013-03-07 : convert and format all .png icons to .svg.
+

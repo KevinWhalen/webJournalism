@@ -1,0 +1,16 @@
+[
+	{"name": "Facebook", "icon": "../images/icons/facebook.svg", "category":
+		[
+		{"shape": "circle", "rating": 5, "text": "test text facebook circle"},
+		{"shape": "rect", "rating": -2, "text": "test text facebook rectangle"},
+		{"shape": "ellipse", "rating": 4, "text": "test text facebooke ellipse"}
+		]
+	},
+	{"name": "YouTube", "icon": "../images/icons/youtube.svg", "category":
+		[
+		{"shape": "circle", "rating": -3, "text": "test text circle"},
+		{"shape": "rect", "rating": -2, "text": "test text rectangle"},
+		{"shape": "ellipse", "rating": 4, "text": "test text ellipse"}
+		]
+	}
+]

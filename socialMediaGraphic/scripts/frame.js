@@ -3,14 +3,15 @@
  * Kevin Whalen
  * 2/17/13
  *
- * Array.forEach(function(element, idex, array){});
+ * Array.forEach(function(element, index, array){});
 */
+
 
 // Scaled to width and height. The graphic is balanced for a 2:1 ratio of w:h.
 //function initiateGraphic(w = 800, h = 400, global data object)
 function initiateGraphic(w = 800, h = 400)
 {
-// variables. coordinates origin is upper left.
+	// variables. coordinates origin is upper left.
 	var frameWidth = w;
 	var frameHeight = h;
 	var barOffsetX = frameWidth * 0.06;
@@ -20,7 +21,14 @@ function initiateGraphic(w = 800, h = 400)
 
 	// icon diameter for width/height and such
 	var iconDiameter = frameHeight * 0.15;
-
+/*
+	// scale rating to value inside height (top-down, 0 to frameHeight)
+	var chartRating = d3.scale.linear()
+		.domain[5, -5] // lower on the screen is the greater height
+	.range([((iconDiameter / 2) + 5), (frameHeight - 5 - (iconDiameter / 2))])
+		.interpolate();
+document.getElementById("p_article").innerHTML = chartRating(-4);
+*/
 /*	var color = d3.scale.quantize()
 			.domain([-5,5])
 			.range(["rgb(#,#,#)", ""]); // needs 11 colors
@@ -51,51 +59,72 @@ function initiateGraphic(w = 800, h = 400)
 [
 	{"name": "Facebook", "icon": "images/icons/facebook.svg", "category":
 		[
-		{"shape": "circle", "rating": 5, "text": "test text facebook circle"},
-		{"shape": "rect", "rating": -2, "text": "test text facebook rectangle"},
-		{"shape": "ellipse", "rating": 4, "text": "test text facebooke ellipse"}
+		{"shape": "diamond", "rating": 5, "text": "test text facebook circle", 
+      "file": "images/icons/diamond.svg"},
+		{"shape": "rectangle", "rating": -2, "text": "test facebook rectangle", 
+      "file": "images/icons/rectangle.svg"},
+		{"shape": "triangle", "rating": 4, "text": "test text facebooke ellipse", 
+      "file": "images/icons/triangle.svg"}
 		]
 	},
 	{"name": "YouTube", "icon": "images/icons/youtube.svg", "category":
 		[
-		{"shape": "circle", "rating": -3, "text": "test text circle"},
-		{"shape": "rect", "rating": -2, "text": "test text rectangle"},
-		{"shape": "ellipse", "rating": 4, "text": "test text ellipse"}
+		{"shape": "diamond", "rating": 3, "text": "test text circle", 
+      "file": "images/icons/diamond.svg"},
+		{"shape": "rectangle", "rating": -2, "text": "test text rectangle", 
+      "file": "images/icons/rectangle.svg"},
+		{"shape": "triangle", "rating": 4, "text": "test text ellipse", 
+      "file": "images/icons/triangle.svg"}
 		]
 	},
 	{"name": "Twitter", "icon": "images/icons/twitter.svg", "category":
 		[
-		{"shape": "circle", "rating": -3, "text": "test text circle"},
-		{"shape": "rect", "rating": 5, "text": "test text rectangle"},
-		{"shape": "ellipse", "rating": 4, "text": "test text ellipse"}
+		{"shape": "diamond", "rating": -3, "text": "test text circle", 
+      "file": "images/icons/diamond.svg"},
+		{"shape": "rectangle", "rating": -2, "text": "test text rectangle", 
+      "file": "images/icons/rectangle.svg"},
+		{"shape": "triangle", "rating": 4, "text": "test text ellipse", 
+      "file": "images/icons/triangle.svg"}
 		]
 	},
 	{"name": "Pinterest", "icon": "images/icons/pinterest.svg", "category":
 		[
-		{"shape": "circle", "rating": 3, "text": "test text circle"},
-		{"shape": "rect", "rating": -2, "text": "test text rectangle"},
-		{"shape": "ellipse", "rating": 4, "text": "test text ellipse"}
+		{"shape": "diamond", "rating": -1, "text": "test text circle", 
+      "file": "images/icons/diamond.svg"},
+		{"shape": "rectangle", "rating": -2, "text": "test text rectangle", 
+      "file": "images/icons/rectangle.svg"},
+		{"shape": "triangle", "rating": 4, "text": "test text ellipse", 
+      "file": "images/icons/triangle.svg"}
 		]
 	},
 	{"name": "Tumblr", "icon": "images/icons/tumblr.svg", "category":
 		[
-		{"shape": "circle", "rating": -3, "text": "test text circle"},
-		{"shape": "rect", "rating": 5, "text": "test text rectangle"},
-		{"shape": "ellipse", "rating": 4, "text": "test text ellipse"}
+		{"shape": "diamond", "rating": 4, "text": "test text circle", 
+      "file": "images/icons/diamond.svg"},
+		{"shape": "rectangle", "rating": -2, "text": "test text rectangle", 
+      "file": "images/icons/rectangle.svg"},
+		{"shape": "triangle", "rating": 4, "text": "test text ellipse", 
+      "file": "images/icons/triangle.svg"}
 		]
 	},
 	{"name": "Reddit", "icon": "images/icons/reddit.svg", "category":
 		[
-		{"shape": "circle", "rating": -3, "text": "test text circle"},
-		{"shape": "rect", "rating": 5, "text": "test text rectangle"},
-		{"shape": "ellipse", "rating": 4, "text": "test text ellipse"}
+		{"shape": "diamond", "rating": 2, "text": "test text circle", 
+      "file": "images/icons/diamond.svg"},
+		{"shape": "rectangle", "rating": -2, "text": "test text rectangle", 
+      "file": "images/icons/rectangle.svg"},
+		{"shape": "triangle", "rating": 4, "text": "test text ellipse", 
+      "file": "images/icons/triangle.svg"}
 		]
 	},
 	{"name": "WordPress", "icon": "images/icons/wordpress.svg", "category":
 		[
-		{"shape": "circle", "rating": -3, "text": "test text circle"},
-		{"shape": "rect", "rating": 5, "text": "test text rectangle"},
-		{"shape": "ellipse", "rating": 4, "text": "test text ellipse"}
+		{"shape": "diamond", "rating": -5, "text": "test text circle", 
+      "file": "images/icons/diamond.svg"},
+		{"shape": "rectangle", "rating": -2, "text": "test text rectangle", 
+      "file": "images/icons/rectangle.svg"},
+		{"shape": "triangle", "rating": 4, "text": "test text ellipse", 
+      "file": "images/icons/triangle.svg"}
 		]
 	}
 ];
@@ -176,7 +205,7 @@ titleData.forEach(function(d,i,a){
 
 	// async?
 	// insert SVG image files as XML
-	d3.xml(d["icon"], "image/svg+xml", function(error,xml) {
+	d3.xml(d["icon"], "image/svg+xml", function(error,xml){
 		// inner XML IDs: svg_name, group_name, img_name
 	document.getElementById("g_" + d["name"]).appendChild(xml.documentElement);
 
@@ -195,7 +224,6 @@ titleData.forEach(function(d,i,a){
 });
 
 /*
-	// media site title bubbles
 	var titles = svg.selectAll("ellipse");
 	titles.data(titleData)
 		.enter().append("ellipse")
@@ -206,19 +234,43 @@ titleData.forEach(function(d,i,a){
 	//var articles = svg.selectAll
 
 	titleData.forEach(function(d,i,a){
-		d3.select("#g_" + d["name"])
-//			.append(d["category"]["shape"])
-			.append("rect")
-			.attr("width", 25)
-			.attr("height", 25)
-			.attr("x", barOffsetX + (35 * i))
-			.attr("y", 120)
-			.attr("id", "rect_" + d["name"])
-			.attr("fill", "dodgerblue")
-//			.attr("text-anchor", "middle")
-			.style("z-index", 101);
-//			.text(function(d,i){ d["name"] });
-	});
+    d["category"].forEach(function(s){
+//      d3.xml(s["file"], "image/svg+xml", function(error,xml){
+//	document.getElementById("g_" + d["name"]).appendChild(xml.documentElement);
+
+// set new id
+//document.getElementById("svg_" + s["shape"]).id = d["name"] + "_" + s["shape"];
+
+/*
+		 //svg.select(d["name"] + "_" + s["shape"])
+		 svg.select("svg_" + s["shape"])
+      .attr("id", d["name"] + "_" + s["shape"])
+			.attr("x", barOffsetX - (iconDiameter / 2))
+			.attr("y", centerY - (iconDiameter / 2));
+      //.style("display", "none");
+		 svg.select("#img_" + s["shape"])
+		  .attr("id", "#img_" + d["name"] + "_" + s["shape"])
+			.attr("xlink:title", s["shape"])
+			.attr("width", (iconDiameter * 0.65))
+			.attr("height", (iconDiameter * 0.65));
+
+*/
+      d3.select("#g_" + d["name"])
+  //			.append(d["category"]["shape"])
+        .append("rect")
+        .attr("width", (iconDiameter * 0.65))
+        .attr("height", (iconDiameter * 0.65))
+        .attr("x", barOffsetX + (50 * i))
+        .attr("y", 120)
+        .attr("id", "rect_" + d["name"])
+        .attr("fill", "dodgerblue")
+  //			.attr("text-anchor", "middle")
+        .style("z-index", 101);
+  //			.text(function(d,i){ d["name"] });
+
+//      });
+    });
+  });
 
 
 
@@ -281,20 +333,23 @@ function animateGraphic(barLength, barOffsetX, titleCount)
 			var portion = ((barLength - (offset * 2)) / (titleCount - 1)) * i;
 			return totalOffset + portion;
 			});
-/*
+
 	// this transition will be on the category objects
-		//select group_
 		//d["category"].forEach(function(d,i,a){});
 		//select("#category_" + d["category"]["
-			.transition() // move to rating vertical position
-			.delay(3000)
-			.duration(2500)
-			.attr("cy", function(d,i){
-				//var position = 
-				return (centerY - d["rating"]);
-			});
-*/
+
+    //d["category"].forEach(function(cat){
+      d3.select("#rect_" + d["name"])
+        .transition() // move to rating vertical position
+        .delay(2700)
+        .duration(2500)
+        .attr("y", (300 - (d.category[0]["rating"] * 10)) );
+    //});
 	});
+
+//	window.researchData.forEach(function(d,i,a){
+
+//	});
 
 document.getElementById("testP").innerHTML = "tranisition to";
 }
@@ -305,6 +360,11 @@ function reverseGraphic(barOffsetX)
 	// return to starting positions
 	window.researchData.forEach(function(d,i,a){
 		// collapse category shapes
+      d3.select("#rect_" + d["name"])
+        .transition() // move to rating vertical position
+        .delay(200)
+        .duration(2500)
+        .attr("y", 120);
 /*
 	// this transition will be on the category objects
 		//d["category"].forEach(function(d,i,a){});

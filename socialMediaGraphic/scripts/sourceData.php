@@ -1,17 +1,14 @@
 <?php
-// script to source data from .csv file for cereal comparison scatterplot.
+// Script to source data from .json file for use as a global JSON object.
+// Preformed at page load only.
 
-// Each column head is associated with an index.
-// Each line is a cereal with each element being the value of the 
-// type specified in the column head array of the same index.
+$filename = "./data/reseached.json";
 
-//open file
+// file string
+  $jsonString = file_get_contents($filename);
 
-//read in column heads
-
-//continue to read in data line by line until end of file
-
-//pass to javacript
+//  javacript
 $out = json_encode($data);
+echo "window.researchData = $out;" . PHP_EOL;
 
 ?>
