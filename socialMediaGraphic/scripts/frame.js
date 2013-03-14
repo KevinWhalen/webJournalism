@@ -65,8 +65,8 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 		[
 		{"shape": "diamond", "rating": 5, "text": "test text facebook circle", 
       "file": "images/icons/diamond.svg"},
-		{"shape": "rectangle", "rating": -2, "text": "test facebook rectangle", 
-      "file": "images/icons/rectangle.svg"},
+		{"shape": "square", "rating": -2, "text": "test facebook rectangle", 
+      "file": "images/icons/square.svg"},
 		{"shape": "triangle", "rating": 4, "text": "test text facebooke ellipse", 
       "file": "images/icons/triangle.svg"}
 		]
@@ -75,8 +75,8 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 		[
 		{"shape": "diamond", "rating": 3, "text": "test text circle", 
       "file": "images/icons/diamond.svg"},
-		{"shape": "rectangle", "rating": -2, "text": "test text rectangle", 
-      "file": "images/icons/rectangle.svg"},
+		{"shape": "square", "rating": -2, "text": "test text rectangle", 
+      "file": "images/icons/square.svg"},
 		{"shape": "triangle", "rating": 4, "text": "test text ellipse", 
       "file": "images/icons/triangle.svg"}
 		]
@@ -85,8 +85,8 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 		[
 		{"shape": "diamond", "rating": -3, "text": "test text circle", 
       "file": "images/icons/diamond.svg"},
-		{"shape": "rectangle", "rating": -2, "text": "test text rectangle", 
-      "file": "images/icons/rectangle.svg"},
+		{"shape": "square", "rating": -2, "text": "test text rectangle", 
+      "file": "images/icons/square.svg"},
 		{"shape": "triangle", "rating": 4, "text": "test text ellipse", 
       "file": "images/icons/triangle.svg"}
 		]
@@ -95,8 +95,8 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 		[
 		{"shape": "diamond", "rating": -1, "text": "test text circle", 
       "file": "images/icons/diamond.svg"},
-		{"shape": "rectangle", "rating": -2, "text": "test text rectangle", 
-      "file": "images/icons/rectangle.svg"},
+		{"shape": "square", "rating": -2, "text": "test text rectangle", 
+      "file": "images/icons/square.svg"},
 		{"shape": "triangle", "rating": 4, "text": "test text ellipse", 
       "file": "images/icons/triangle.svg"}
 		]
@@ -105,8 +105,8 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 		[
 		{"shape": "diamond", "rating": 4, "text": "test text circle", 
       "file": "images/icons/diamond.svg"},
-		{"shape": "rectangle", "rating": -2, "text": "test text rectangle", 
-      "file": "images/icons/rectangle.svg"},
+		{"shape": "square", "rating": -2, "text": "test text rectangle", 
+      "file": "images/icons/square.svg"},
 		{"shape": "triangle", "rating": 4, "text": "test text ellipse", 
       "file": "images/icons/triangle.svg"}
 		]
@@ -115,8 +115,8 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 		[
 		{"shape": "diamond", "rating": 2, "text": "test text circle", 
       "file": "images/icons/diamond.svg"},
-		{"shape": "rectangle", "rating": -2, "text": "test text rectangle", 
-      "file": "images/icons/rectangle.svg"},
+		{"shape": "square", "rating": -2, "text": "test text rectangle", 
+      "file": "images/icons/square.svg"},
 		{"shape": "triangle", "rating": 4, "text": "test text ellipse", 
       "file": "images/icons/triangle.svg"}
 		]
@@ -125,8 +125,8 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 		[
 		{"shape": "diamond", "rating": -5, "text": "test text circle", 
       "file": "images/icons/diamond.svg"},
-		{"shape": "rectangle", "rating": -2, "text": "test text rectangle", 
-      "file": "images/icons/rectangle.svg"},
+		{"shape": "square", "rating": -2, "text": "test text rectangle", 
+      "file": "images/icons/square.svg"},
 		{"shape": "triangle", "rating": 4, "text": "test text ellipse", 
       "file": "images/icons/triangle.svg"}
 		]
