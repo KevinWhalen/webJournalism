@@ -161,13 +161,17 @@ document.write("<br />" + numTitles);
 		.attr("stroke", "black")
 		.attr("stroke-width", 0)
 		// transition graphic
-		.on("mouseover", function(d,i){
-			animateGraphic(barLength, (barOffsetX - (iconDiameter / 2)), titleCount), centerY;
-		})
+//		.on("mouseover", function(d,i){
+//			animateGraphic(barLength, (barOffsetX - (iconDiameter / 2)), titleCount, centerY);
+//		})
 		// transition back to starting state
 		.on("mouseout", function(d,i){
 			reverseGraphic((barOffsetX - (iconDiameter / 2)), centerY);
 		}) 
+		.on("click", function(d,i){
+// write toggle function
+			animateGraphic(barLength, (barOffsetX - (iconDiameter / 2)), titleCount, centerY);
+		})
 		.style("z-index", 1)
 		.style("margin-left", "auto")
 		.style("margin-right", "auto")
@@ -240,19 +244,21 @@ titleData.forEach(function(d,i,a){
 	document.getElementById("g_" + d["name"]).appendChild(xml.documentElement);
 
 // set new id
-document.getElementById("svg_" + s["shape"]).id = d["name"] + "_" + s["shape"];
+//document.getElementById("svg_" + s["shape"]).id = d["name"] + "_" + s["shape"];
 
-		 //svg.select(d["name"] + "_" + s["shape"])
-		 svg.select("svg_" + s["shape"])
+//		 svg.select("#" + d["name"] + "_" + s["shape"])
+		 svg.select("#svg_" + s["shape"])
       .attr("id", d["name"] + "_" + s["shape"])
-			.attr("x", barOffsetX - (iconDiameter / 2))
-			.attr("y", centerY - (iconDiameter / 2));
-      //.style("display", "none");
+			.attr("width", (iconDiameter * 0.80))
+			.attr("height", (iconDiameter * 0.80))
+			.attr("x", barOffsetX - ((iconDiameter * 0.9) / 2))
+			.attr("y", centerY - ((iconDiameter * 0.9) / 2))
+     ;// .style("display", "none");
 		 svg.select("#img_" + s["shape"])
 		  .attr("id", "#img_" + d["name"] + "_" + s["shape"])
-			.attr("xlink:title", s["shape"])
-			.attr("width", (iconDiameter * 0.65))
-			.attr("height", (iconDiameter * 0.65));
+			.attr("xlink:title", s["shape"]);
+//			.attr("width", (iconDiameter * 0.65))
+//			.attr("height", (iconDiameter * 0.65));
 
 /*
       d3.select("#g_" + d["name"])
@@ -336,16 +342,19 @@ function animateGraphic(barLength, barOffsetX, titleCount, centerY)
 			});
 
 	// this transition will be on the category objects
-		//d["category"].forEach(function(d,i,a){});
-		//select("#category_" + d["category"]["
-
-    //d["category"].forEach(function(cat){
-      d3.select("#rect_" + d["name"])
+    d["category"].forEach(function(s){
+      d3.select("#" + d["name"] + "_" + s["shape"])
         .transition() // move to rating vertical position
         .delay(2700)
         .duration(2500)
-        .attr("y", (300 - (d.category[0]["rating"] * 10)) );
-    //});
+.attr("x", function(){
+var offset = barLength * 0.10;
+var totalOffset = barOffsetX + offset;
+var portion = ((barLength - (offset * 2)) / (titleCount - 1)) * i;
+return totalOffset + portion;
+})
+        .attr("y", (centerY - (d.category[0]["rating"] * 10)) );
+    });
 	});
 
 //	window.researchData.forEach(function(d,i,a){
