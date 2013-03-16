@@ -14,20 +14,20 @@
 <body>
 
 <!------------------  Grapic Code  ------------------>
-<div id="graphicRegion" style="width:80%; height:550px; border-style:dotted;
+<div id="graphicRegion" style="width:80%; height:550px; border-style:none;
 		margin-left:5%; padding-left:5%; padding-right:5%;">
+
 	<!------------------  Article  ------------------>
 	<div id="graphicArticle" style="width:80%; height:100px; 
-			border-style:dashed; margin-left:auto; margin-right:auto;">
+			border-style:none; margin-left:auto; margin-right:auto;">
 		<p id="p_article">
-		asdf.
+		
 		</p>
 	</div>
 	<!------------------  ------------------>
 
-<div id="testOutput">
-<p id="testP">asdf</p>
-</div>
+  <!------  SVG Graphics  ------>
+  <!------  ------>
 
 </div>
 <!------------------  ------------------>
@@ -39,27 +39,17 @@
 <script type="text/javascript" src="scripts/colorbrewer.js"></script>
 
 <script type="text/javascript" src="scripts/toggleVisibility.js"></script>
-<script type="text/javascript" src="scripts/frame.js"></script>
-<!--script type="text/javascript" src="scripts/initiateSocialGraphic.js">
+<script type="text/javascript" src="scripts/initiateSocialGraphic.js">
 // initiate the social media ratings graphic</script>
 <script type="text/javascript" src="scripts/animateSocialGraphic.js">
 // mouse over animations</script>
 <script type="text/javascript" src="scripts/reverseSocialGraphic.js">
-// mouse out return original state animations</script-->
-
-<!-- javascript event: window resize - jQuery  - -->
-
+// mouse out return original state animations</script>
+<script type="text/javascript" src="scripts/resizeSocialGraphic.js"></script>
+<script type="text/javascript" src="scripts/jQScript.js"></script>
 <!------------------  ------------------>
 
-<script type="text/javascript" src="scripts/jQScriptIfneeded.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-  //$(window).resize(function(){});
-
-	//thefunction();
-
-});
-
 //<?php require "scripts/sourceData.php"; ?>
 
 	var width = window.innerWidth * 0.77;
@@ -70,3 +60,4 @@ $(document).ready(function(){
 </body>
 
 </html>
+
