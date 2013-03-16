@@ -175,8 +175,9 @@ document.write("<br />" + numTitles);
 		.style("z-index", 1)
 		.style("margin-left", "auto")
 		.style("margin-right", "auto")
+//		.style("border-style", "solid")
+		.style("border-style", "none")
 		.style("border-width", 0.2 + "em")
-		.style("border-style", "solid")
 		.style("border-color", "black");
 /*
 	.on("click", function(d,i){
