@@ -1,4 +1,4 @@
-/* jQuery.js
+/* readyFunc.js
  * 
  * Kevin Whalen
  * 2/17/13
