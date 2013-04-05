@@ -121,6 +121,7 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 
 
 //---------------------------------------------------------------------------
+// GIVE UP ON GRADIENT FOR NOW. FOCUS ON RELAYING OUT ICONS AND ADDING ICON BARS
 	// define the fill gradient
 	var gradient = svg.append("svg:defs")
 		.append("svg:linearGradient")
@@ -208,6 +209,14 @@ titleData.forEach(function(d,i,a){
 
 //---------------------------------------------------------------------------
 // Category Shapes
+	// helper function for setting X-Axis position of category icons.
+	function categoryPosition(idx)
+	{
+		var offset = barLength * 0.10;
+		var totalOffset = barOffsetX + offset;
+		var portion = ((barLength - (offset * 2)) / (titleCount - 1)) * idx;
+		return totalOffset + portion;
+	}
 
   // articles per media site 
   titleData.forEach(function(d,i,a){
@@ -215,18 +224,23 @@ titleData.forEach(function(d,i,a){
       d3.xml(s["file"], "image/svg+xml", function(error,xml){
    document.getElementById("g_" + d["name"]).appendChild(xml.documentElement);
 
+		var categoryGroup = svg.select("#g_" + d["name"]).append("rect")
+			.attr("id", "bar_" + d["name"] + "_" + s["shape"])
+			.attr("width", (iconDiameter * 0.40))
+			.attr("height", (barOffsetY - (iconDiameter / 2)))
+			.attr("x", categoryPosition(i))
+			.attr("y", (barOffsetY - (iconDiameter / 2)))
+			.style("z-index", 6)
+			.style("display", "block");
+//			.style("display", "none");
+
 		svg.select("#svg_" + s["shape"])
 			// set new id
 			.attr("id", d["name"] + "_" + s["shape"])
 			.attr("width", (iconDiameter * 0.60))
 			.attr("height", (iconDiameter * 0.60))
 			// give title icon starting "x" location and hide initially
-			.attr("x", function(){
-				var offset = barLength * 0.10;
-				var totalOffset = barOffsetX + offset;
-				var portion = ((barLength - (offset * 2)) / (titleCount - 1)) * i;
-				return totalOffset + portion;
-			})
+			.attr("x", categoryPosition(i))
 			.attr("y", (barOffsetY - (iconDiameter / 2)))
 			.style("z-index", 6)
 			.style("display", "none");
