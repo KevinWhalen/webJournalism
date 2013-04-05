@@ -11,32 +11,23 @@
 
 <title>Social Media Graphic</title>
 </head>
+
 <body>
 
-<!------------------  Grapic Code  ------------------>
-<div id="graphicRegion" style="width:80%; height:550px; border-style:none;
-		margin-left:5%; padding-left:5%; padding-right:5%;">
-
-	<!------------------  Article  ------------------>
-	<div id="graphicArticle" style="width:80%; height:100px; 
-			border-style:none; margin-left:auto; margin-right:auto;">
-		<p id="p_article">
-		
-		</p>
-	</div>
-	<!------------------  ------------------>
-
-  <!------  SVG Graphics  ------>
-  <!------  ------>
+<!--------------  SVG Grapic Code Inserted  -------------->
+<div id="container" style="margin-left:4%;">
 
 </div>
-<!------------------  ------------------>
+<!--------------  -------------->
 
 
 <!------------------  Scripts  ------------------>
 <script type="text/javascript" src="scripts/jQuery/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="scripts/d3/d3.v3.min.js"></script>
 <script type="text/javascript" src="scripts/colorbrewer.js"></script>
+
+<script type="text/javascript" src="data/webSiteRatings.js">
+// researched data as a global JSON object</script>
 
 <script type="text/javascript" src="scripts/toggleVisibility.js"></script>
 <script type="text/javascript" src="scripts/initiateSocialGraphic.js">
@@ -46,13 +37,13 @@
 <script type="text/javascript" src="scripts/reverseSocialGraphic.js">
 // mouse out return original state animations</script>
 <script type="text/javascript" src="scripts/resizeSocialGraphic.js"></script>
-<script type="text/javascript" src="scripts/jQScript.js"></script>
+<script type="text/javascript" src="scripts/readyFunc.js"></script>
 <!------------------  ------------------>
 
 <script type="text/javascript">
 //<?php require "scripts/sourceData.php"; ?>
 
-	var width = window.innerWidth * 0.77;
+	var width = window.innerWidth * 0.90; // was 77%
 	var height = width * 0.50; // window.innerHeight
 	// initiateGraphic with or without a defined (width,height) pair
 	initiateGraphic(width, height);
