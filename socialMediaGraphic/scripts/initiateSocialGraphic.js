@@ -1,4 +1,4 @@
-/* frame.js
+/* initiateSocialGraphic.js
  * 
  * Kevin Whalen
  * 2/17/13
@@ -14,17 +14,21 @@ function initiateGraphic(w = 800, h = 400)
 	// variables. coordinates origin is upper left.
 	var frameWidth = w;
 	var frameHeight = h;
-	var barOffsetX = frameWidth * 0.06;
+	var barOffsetX = frameWidth * 0.06; // was 6%
 	var barOffsetY = frameHeight * 0.49;
-	var barLength = frameWidth * 0.88;
+	var barLength = frameWidth * 0.88; // was 88% when w was 77%
 	var barThickness = frameHeight * 0.015;
 
 	// icon diameter for width/height and such
 	var iconDiameter = frameHeight * 0.15;
 
+// refactor how variables are used in function calls
   // build attribute array for use of passing the above variables to functions
   //var attrs = [frameWidth, frameHeight, barOffsetX ];
 
+
+//==============================================================
+// color scale
 /*
 	// scale rating to value inside height (top-down, 0 to frameHeight)
 	var chartRating = d3.scale.linear()
@@ -47,109 +51,26 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 //247, 251, 255; 222, 235, 247; 198, 219, 239; 158, 202, 225; 107, 174, 214; 66, 146, 198; 33, 113, 181; 8, 81, 156; 8, 48, 107; 
 // example:
 // var fillColor = color(-4.5); // = -5 = lowest color in range.
+//==============================================================
 
-//--------------------------------------------------------------------
-	// Data from journalist research.
-	// name = name of website
-	// icon = displayed circle (SVG file)
-	// category = 3 defined (0,1,2)
-	//		shape = displayed representation of category (needed?) (tri,sq, dia
-	//		rating = designation from -5 through 5
-	//		text = write up on 'category' for 'title'
 
-// Will be insterted into a script in the html page as a global/window object.
-// Instead of d3.json to avoid an asynchronous load here.
-	window.researchData = 
-[
-	{"name": "Facebook", "icon": "images/icons/facebook.svg", "category":
-		[
-		{"shape": "diamond", "rating": 5, "text": "test text facebook circle", 
-      "file": "images/icons/diamond.svg"},
-		{"shape": "square", "rating": 2, "text": "test facebook rectangle", 
-      "file": "images/icons/square.svg"},
-		{"shape": "triangle", "rating": 5, "text": "test text facebooke ellipse", 
-      "file": "images/icons/triangle.svg"}
-		]
-	},
-	{"name": "Twitter", "icon": "images/icons/twitter.svg", "category":
-		[
-		{"shape": "diamond", "rating": 0, "text": "test text circle", 
-      "file": "images/icons/diamond.svg"},
-		{"shape": "square", "rating": 0, "text": "test text rectangle", 
-      "file": "images/icons/square.svg"},
-		{"shape": "triangle", "rating": 0, "text": "test text ellipse", 
-      "file": "images/icons/triangle.svg"}
-		]
-	},
-	{"name": "Tumblr", "icon": "images/icons/tumblr.svg", "category":
-		[
-		{"shape": "diamond", "rating": -5, "text": "test text circle", 
-      "file": "images/icons/diamond.svg"},
-		{"shape": "square", "rating": -5, "text": "test text rectangle", 
-      "file": "images/icons/square.svg"},
-		{"shape": "triangle", "rating": -4, "text": "test text ellipse", 
-      "file": "images/icons/triangle.svg"}
-		]
-	},
-	{"name": "WordPress", "icon": "images/icons/wordpress.svg", "category":
-		[
-		{"shape": "diamond", "rating": -5, "text": "test text circle", 
-      "file": "images/icons/diamond.svg"},
-		{"shape": "square", "rating": 3, "text": "test text rectangle", 
-      "file": "images/icons/square.svg"},
-		{"shape": "triangle", "rating": 1, "text": "test text ellipse", 
-      "file": "images/icons/triangle.svg"}
-		]
-	},
-	{"name": "Reddit", "icon": "images/icons/reddit.svg", "category":
-		[
-		{"shape": "diamond", "rating": -5, "text": "test text circle", 
-      "file": "images/icons/diamond.svg"},
-		{"shape": "square", "rating": -4, "text": "test text rectangle", 
-      "file": "images/icons/square.svg"},
-		{"shape": "triangle", "rating": -5, "text": "test text ellipse", 
-      "file": "images/icons/triangle.svg"}
-		]
-	},
-	{"name": "Pinterest", "icon": "images/icons/pinterest.svg", "category":
-		[
-		{"shape": "diamond", "rating": -5, "text": "test text circle", 
-      "file": "images/icons/diamond.svg"},
-		{"shape": "square", "rating": 0, "text": "test text rectangle", 
-      "file": "images/icons/square.svg"},
-		{"shape": "triangle", "rating": 0, "text": "test text ellipse", 
-      "file": "images/icons/triangle.svg"}
-		]
-	},
-	{"name": "YouTube", "icon": "images/icons/youtube.svg", "category":
-		[
-		{"shape": "diamond", "rating": 5, "text": "test text circle", 
-      "file": "images/icons/diamond.svg"},
-		{"shape": "square", "rating": 2, "text": "test text rectangle", 
-      "file": "images/icons/square.svg"},
-		{"shape": "triangle", "rating": 3, "text": "test text ellipse", 
-      "file": "images/icons/triangle.svg"}
-		]
-	}
-];
-//--------------------------------------------------------------------
-
-//	var titleData = window.researchData; // global data object will be from page
+	// global data object
 	var titleData = window.researchData;
+	// a count of the number of objects in the array.
 	var titleCount = Object.keys(titleData).length;
-/* counting stuff
-	var numTitles = 0;
-	for (idx in titleData){
-		++numTitles;
-	}
-document.write("<br />" + numTitles);
-numTitles = 0;
-	titleData.forEach(function(d,i,a){
-		++numTitles;
-	});
-document.write("<br />" + numTitles);
-*/
 
+
+//---------------------------------------------------------------------------
+	d3.select("body").select("#container").append("div")
+		.attr("id", "graphicRegion")
+		.attr("width", frameWidth)
+		.attr("height", frameHeight)
+		.style("z-index", 0)
+		.style("background-image", "url('images/subtle_white_feathers.png')")
+		.style("display", "inline-block")
+//		.style("border-style", "solid")
+		.style("margin-left", "auto")
+		.style("margin-right", "auto");
 
 	// container
 	var svg = d3.select("body").select("#graphicRegion").append("svg")
@@ -172,7 +93,7 @@ document.write("<br />" + numTitles);
 // write toggle function
 			animateGraphic(barLength, (barOffsetX - (iconDiameter / 2)), titleCount, (barOffsetY - (iconDiameter / 2)));
 		})
-		.style("z-index", 1)
+		.style("z-index", 10)
 		.style("margin-left", "auto")
 		.style("margin-right", "auto")
 //		.style("border-style", "solid")
@@ -185,6 +106,8 @@ document.write("<br />" + numTitles);
 	.append("title").text("some mouse over title text");
 */
 
+
+//---------------------------------------------------------------------------
 	// center bar
 	svg.append("rect")
 		.attr("width", barLength)
@@ -192,9 +115,58 @@ document.write("<br />" + numTitles);
 		.attr("x", barOffsetX)
 		.attr("y", barOffsetY)
 		.attr("id", "centerBar")
-		.style("z-index", 2)
-		//.attr("fill", "#829CAB");
-		.attr("fill", "#BDDCA2");
+		.style("z-index", 1)
+		.attr("fill", "#829CAB"); // blue
+		//.attr("fill", "#BDDCA2"); // green
+
+
+//---------------------------------------------------------------------------
+	// define the fill gradient
+	var gradient = svg.append("svg:defs")
+		.append("svg:linearGradient")
+			.attr("id", "gradient")
+			.attr("x1", "0%")
+			.attr("x2", "0%")
+			.attr("y1", "100%")
+			.attr("y2", "100%")
+			.attr("spreadMethod", "pad");
+			//.attr("gradientUnits", "userSpaceOnUse");
+
+	gradient.append("stop")
+		.attr("offset", "0%")
+		.attr("stop-color", "#000000")
+		.attr("stop-opacity", 1);
+
+	gradient.append("stop")
+		.attr("offset", "100%")
+		.attr("stop-color", "#829CAB")
+		.attr("stop-opacity", 1);
+
+	// vertical bar legend 
+	svg.append("rect")
+		.attr("width", (frameWidth * 0.05))
+		.attr("height", frameHeight)
+		.attr("x", 0)
+		.attr("y", 0)
+		.attr("id", "legendBar")
+		.style("z-index", 1)
+		.attr("fill", "url(#gradient)"); // blue
+//		.attr("fill", "#829CAB"); // blue
+
+
+/*
+// fill gradient backup plan - CSS3
+// Safari 4-5, Chrome 1-9 : Safari 5.1, Chrome 10+ : Firefox 3.6+ : IE 10 : Opera 11.10+
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1a82f7), to(#2F2727)); 
+background: -webkit-linear-gradient(top, #2F2727, #1a82f7);
+background: -moz-linear-gradient(top, #2F2727, #1a82f7);
+background: -ms-linear-gradient(top, #2F2727, #1a82f7);
+background: -o-linear-gradient(top, #2F2727, #1a82f7);
+// fill gradient CSS fallback
+background-color: #1a82f7;
+background: url(images/one_pixel_wide_gradient_strip.png);
+background-repeat: repeat-x;
+*/
 
 
 //---------------------------------------------------------------------------
@@ -221,6 +193,7 @@ titleData.forEach(function(d,i,a){
 		// if async, might have to move groupings and articles here
 		// size and location
 		 svg.select("#svg_" + d["name"])
+			.style("z-index", 5)
 			// svg location in a svg is center based
 			.attr("x", barOffsetX - (iconDiameter / 2))
 			.attr("y", centerY - (iconDiameter / 2));
@@ -232,44 +205,41 @@ titleData.forEach(function(d,i,a){
 	});
 });
 
-/*
-	var titles = svg.selectAll("ellipse");
-	titles.data(titleData)
-		.enter().append("ellipse")
-*/
+
 //---------------------------------------------------------------------------
+// Category Shapes
 
-	// articles per media site 
-	//var articles = svg.selectAll
-
-	titleData.forEach(function(d,i,a){
+  // articles per media site 
+  titleData.forEach(function(d,i,a){
     d["category"].forEach(function(s, sID){
       d3.xml(s["file"], "image/svg+xml", function(error,xml){
-	document.getElementById("g_" + d["name"]).appendChild(xml.documentElement);
+   document.getElementById("g_" + d["name"]).appendChild(xml.documentElement);
 
-		 svg.select("#svg_" + s["shape"])
-      // set new id
-      .attr("id", d["name"] + "_" + s["shape"])
-			.attr("width", (iconDiameter * 0.80))
-			.attr("height", (iconDiameter * 0.80))
-      // give title icon starting "x" location and hide initially
-      .attr("x", function(){
-      var offset = barLength * 0.10;
-      var totalOffset = barOffsetX + offset;
-      var portion = ((barLength - (offset * 2)) / (titleCount - 1)) * i;
-      return totalOffset + portion;
-      })
+		svg.select("#svg_" + s["shape"])
+			// set new id
+			.attr("id", d["name"] + "_" + s["shape"])
+			.attr("width", (iconDiameter * 0.60))
+			.attr("height", (iconDiameter * 0.60))
+			// give title icon starting "x" location and hide initially
+			.attr("x", function(){
+				var offset = barLength * 0.10;
+				var totalOffset = barOffsetX + offset;
+				var portion = ((barLength - (offset * 2)) / (titleCount - 1)) * i;
+				return totalOffset + portion;
+			})
 			.attr("y", (barOffsetY - (iconDiameter / 2)))
-      .style("display", "none");
-		 svg.select("#img_" + s["shape"])
-		  .attr("id", "#img_" + d["name"] + "_" + s["shape"])
-			.attr("xlink:title", s["shape"])
-			.attr("width", (iconDiameter * 0.80))
-			.attr("height", (iconDiameter * 0.80));
+			.style("z-index", 6)
+			.style("display", "none");
 
-//        .attr("fill", "dodgerblue")
-  //			.attr("text-anchor", "middle")
-  //			.text(function(d,i){ d["name"] });
+		svg.select("#img_" + s["shape"])
+			.attr("id", "#img_" + d["name"] + "_" + s["shape"])
+			.attr("xlink:title", s["shape"])
+			.attr("width", (iconDiameter * 0.60))
+			.attr("height", (iconDiameter * 0.60));
+
+//.attr("fill", "dodgerblue")
+//.attr("text-anchor", "middle")
+//.text(function(d,i){ d["name"] });
 
       });
     });
@@ -314,6 +284,11 @@ titleData.forEach(function(d,i,a){
 	.on("click", //lightbox
 
 	.append("title").text("some mouse over title text")
+*/
+/*
+	var titles = svg.selectAll("ellipse");
+	titles.data(titleData)
+		.enter().append("ellipse")
 */
 
 }

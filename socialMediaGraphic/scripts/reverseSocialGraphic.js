@@ -31,6 +31,7 @@ function reverseGraphic(barOffsetX, centerY)
 				return (centerY - d["rating"]);
 			});
 */
+/* functioning, just commented out during development
 		// collapse title icons
 		d3.select("#svg_" + d["name"])
 			.transition()
@@ -39,6 +40,7 @@ function reverseGraphic(barOffsetX, centerY)
 			.attr("x", function(){
 				return barOffsetX;
 			});
+*/
 	});
 }
 
