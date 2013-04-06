@@ -16,15 +16,25 @@ function initiateGraphic(w = 800, h = 400)
 	var frameHeight = h;
 	var barOffsetX = frameWidth * 0.06; // was 6%
 	var barOffsetY = frameHeight * 0.49;
-	var barLength = frameWidth * 0.88; // was 88% when w was 77%
+	var barLength = frameWidth * 0.92; // was 88% when w was 77%
 	var barThickness = frameHeight * 0.015;
+	var legendWidth = (frameWidth * 0.05)
 
 	// icon diameter for width/height and such
-	var iconDiameter = frameHeight * 0.15;
+	var iconDiameter = frameHeight * 0.12; // was 15%
 
 // refactor how variables are used in function calls
   // build attribute array for use of passing the above variables to functions
-  //var attrs = [frameWidth, frameHeight, barOffsetX ];
+/*	var attrs = [{'frameWidth': frameWidth}, {'frameHeight': frameHeight}, 
+				{'barOffsetX': barOffsetX}, {'barOffsetY': barOffsetY}, 
+				{'barLength': barLength}, {'iconDiameter': iconDiameter}];
+*/
+
+
+	// global data object
+	var titleData = window.researchData;
+	// a count of the number of objects in the array.
+	var titleCount = Object.keys(titleData).length;
 
 
 //==============================================================
@@ -54,12 +64,6 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 //==============================================================
 
 
-	// global data object
-	var titleData = window.researchData;
-	// a count of the number of objects in the array.
-	var titleCount = Object.keys(titleData).length;
-
-
 //---------------------------------------------------------------------------
 	d3.select("body").select("#container").append("div")
 		.attr("id", "graphicRegion")
@@ -83,7 +87,8 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 		.attr("stroke-width", 0)
 		// transition graphic
 		.on("mouseover", function(d,i){
-			animateGraphic(barLength, (barOffsetX - (iconDiameter / 2)), titleCount, (barOffsetY - (iconDiameter / 2)));
+			animateGraphic(barLength, legendWidth, barOffsetY, titleCount, iconDiameter);
+			//animateGraphic(barLength, (barOffsetX - (iconDiameter / 2)), titleCount, (barOffsetY - (iconDiameter / 2)));
 		})
 		// transition back to starting state
 		.on("mouseout", function(d,i){
@@ -145,7 +150,7 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 
 	// vertical bar legend 
 	svg.append("rect")
-		.attr("width", (frameWidth * 0.05))
+		.attr("width", legendWidth)
 		.attr("height", frameHeight)
 		.attr("x", 0)
 		.attr("y", 0)
@@ -209,13 +214,25 @@ titleData.forEach(function(d,i,a){
 
 //---------------------------------------------------------------------------
 // Category Shapes
-	// helper function for setting X-Axis position of category icons.
-	function categoryPosition(idx)
+	// helper function for setting X-Axis position of categories.
+	function categoryPosition(idx, sIdx)
 	{
+// SCOPE?
+/*
 		var offset = barLength * 0.10;
 		var totalOffset = barOffsetX + offset;
 		var portion = ((barLength - (offset * 2)) / (titleCount - 1)) * idx;
 		return totalOffset + portion;
+*/
+
+		var segment = barLength + (barLength * 0.10);
+		var offsetX = legendWidth + iconDiameter;//(iconDiameter / 2);
+		var centerY = barOffsetY - (iconDiameter / 2);
+
+		var exposeRight = segment * 0.10;
+		var reducedSegment = (segment - (exposeRight * 2));
+		var portion = ((reducedSegment / (titleCount - 1)) * idx) + (sIdx * 20);
+		return offsetX + portion;
 	}
 
   // articles per media site 
@@ -227,12 +244,14 @@ titleData.forEach(function(d,i,a){
 		var categoryGroup = svg.select("#g_" + d["name"]).append("rect")
 			.attr("id", "bar_" + d["name"] + "_" + s["shape"])
 			.attr("width", (iconDiameter * 0.40))
-			.attr("height", (barOffsetY - (iconDiameter / 2)))
-			.attr("x", categoryPosition(i))
-			.attr("y", (barOffsetY - (iconDiameter / 2)))
+//			.attr("height", (barOffsetY - (iconDiameter / 2)))
+			.attr("height", 0)
+			.attr("x", categoryPosition(i, sID))
+//			.attr("y", (barOffsetY - (iconDiameter / 2)))
+			.attr("y", centerY)
 			.style("z-index", 6)
-			.style("display", "block");
-//			.style("display", "none");
+			.style("display", "none")
+			.attr("fill", "url(#gradient)");
 
 		svg.select("#svg_" + s["shape"])
 			// set new id
@@ -240,7 +259,7 @@ titleData.forEach(function(d,i,a){
 			.attr("width", (iconDiameter * 0.60))
 			.attr("height", (iconDiameter * 0.60))
 			// give title icon starting "x" location and hide initially
-			.attr("x", categoryPosition(i))
+			.attr("x", categoryPosition(i, sID))
 			.attr("y", (barOffsetY - (iconDiameter / 2)))
 			.style("z-index", 6)
 			.style("display", "none");
