@@ -1,0 +1,28 @@
+/* carousel.css
+ * 
+ * Kevin Whalen
+ * 3/19/13
+.jcarousel {
+*/
+
+.jcarousel {
+	position: relative;
+	overflow: hidden;
+	/* You need at least a height, adjust this to your needs */
+	height: 100px;
+	width: 330px;
+}
+
+.jcarousel ul {
+	width: 20000em;
+	position: absolute;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.jcarousel li {
+	padding-left: 10px;
+	float: left;
+	height: 100px;
+}

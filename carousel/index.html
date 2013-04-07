@@ -1,0 +1,159 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Video slideset carousel." />
+<meta name="keywords" content="web media programming journalism" />
+<meta name="dcterms.dateCopyrighted" content="&copy;2013" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="author" content="Kevin Whalen" />
+
+<title>Video Slideset Carousel</title>
+</head>
+<body>
+
+<div id="warp">
+		<!--ul id="theCarousel" class="jcarousel-skin-tango"-->
+		<button class="jcarousel-prev">previous</button>
+	<div class="jcarousel">
+		<ul>
+		</ul>
+	</div>
+		<button class="jcarousel-next">next</button>
+</div>
+
+
+<!------------------  ------------------>
+<div id="mainRegion" style="width:80%; height:550px; border-style:none;
+		margin-left:5%; padding-left:5%; padding-right:5%;">
+
+	<!------------------  ------------------>
+	<div id="graphicArticle" style="width:80%; height:100px; 
+			border-style:none; margin-left:auto; margin-right:auto;">
+		<p id="p_article">
+		
+		</p>
+	</div>
+	<!------------------  ------------------>
+
+	<!------------------  ------------------>
+	<!--div id="slidesetCarousel" class="theCarousel"-->
+	<div id="slidesetCarousel">
+	</div>
+	<!------------------  ------------------>
+
+</div>
+<!------------------  ------------------>
+
+
+<!------------------ Style Sheets ------------------>
+<link rel="stylesheet" type="text/css" href="styles/carousel.css" />
+<!--link rel="stylesheet" type="text/css" href="styles/tango_skin.css" /-->
+<!--link rel="stylesheet" type="text/css" href="styles/main.css" /-->
+<!------------------  ------------------>
+
+<!------------------  Scripts  ------------------>
+<script type="text/javascript" src="scripts/jQuery/jquery-1.9.1.min.js"></script>
+<!--script type="text/javascript" src="scripts/jQuery/jquery-1.4.2.min.js"></script-->
+<!--script type="text/javascript" src="scripts/d3/d3.v3.min.js"></script-->
+<script type="text/javascript" src="scripts/jCarousel/jquery.jcarousel.min.js"></script>
+
+<!--script type="text/javascript" src="scripts/toggleVisibility.js"></script-->
+<!--script type="text/javascript" src="scripts/readyFunc.js"></script-->
+<!------------------  ------------------>
+
+<script type="text/javascript">
+//<?php require "scripts/sourceData.php"; ?>
+
+//	var width = window.innerWidth * 0.77;
+//	var height = width * 0.50; // window.innerHeight
+	// initiateGraphic with or without a defined (width,height) pair
+	//initiateCarousel(width, height);
+
+/*
+	jQuery(document).ready(function() {
+		jQuery('#mycarousel').jcarousel();
+	});
+*/
+
+	$(document).ready(function(){
+
+		$('.jcarousel').jcarousel({
+			// Configuration goes here
+		});
+
+		$('.jcarousel-prev').click(function() {
+			$('.jcarousel').jcarousel('scroll', '-=1');
+		});
+
+		$('.jcarousel-next').click(function() {
+			$('.jcarousel').jcarousel('scroll', '+=1');
+		});
+//		populate();
+		populateAll();
+
+		function populateAll(videoSet){
+			videoSet.forEach (function(v){
+				// Append items
+				$('.jcarousel ul')
+					.append('<li><img src="'+v.thumbnail+'" width="100" height="100" /></li>');
+			});
+			// Reload carousel
+			$('.jcarousel').jcarousel('reload');
+		}
+		function populate(videoSet){
+			// Append items
+			$('.jcarousel ul')
+/*
+				.append('<li>Item 1</li>')
+				.append('<li>Item 2</li>')
+				.append('<li>Item 3</li>')
+				.append('<li>Item 4</li>')
+				.append('<li>Item 5</li>')
+				.append('<li>Item 6</li>')
+				.append('<li>Item 7</li>')
+				.append('<li>Item 8</li>')
+				.append('<li>Item 9</li>')
+				.append('<li>Item 10</li>')
+				.append('<li>Item 11</li>')
+				.append('<li>Item 12</li>')
+				.append('<li>Item 13</li>')
+				.append('<li>Item 14</li>')
+				.append('<li>Item 15</li>')
+				.append('<li>Item 16</li>')
+				.append('<li>Item 17</li>')
+				.append('<li>Item 18</li>')
+				.append('<li>Item 19</li>')
+*/
+				.append('<li>Item 20</li>');
+
+			// Reload carousel
+			$('.jcarousel').jcarousel('reload');
+		}
+
+/*
+		$(window).resize(function(){
+			var width = window.innerWidth * 0.77;
+			var height = width * 0.50;
+			//resizeFrame(width, height);
+		});
+			<li><img src="http://static.flickr.com/66/199481236_dc98b5abb3_s.jpg" width="100" height="100" alt="" /></li>
+			<li><img src="http://static.flickr.com/75/199481072_b4a0d09597_s.jpg" width="100" height="100" alt="" /></li>
+			<li><img src="http://static.flickr.com/57/199481087_33ae73a8de_s.jpg" width="100" height="100" alt="" /></li>
+			<li><img src="http://static.flickr.com/77/199481108_4359e6b971_s.jpg" width="100" height="100" alt="" /></li>
+			<li><img src="http://static.flickr.com/58/199481143_3c148d9dd3_s.jpg" width="100" height="100" alt="" /></li>
+			<li><img src="http://static.flickr.com/72/199481203_ad4cdcf109_s.jpg" width="100" height="100" alt="" /></li>
+			<li><img src="http://static.flickr.com/58/199481218_264ce20da0_s.jpg" width="100" height="100" alt="" /></li>
+			<li><img src="http://static.flickr.com/69/199481255_fdfe885f87_s.jpg" width="100" height="100" alt="" /></li>
+			<li><img src="http://static.flickr.com/60/199480111_87d4cb3e38_s.jpg" width="100" height="100" alt="" /></li>
+			<li><img src="http://static.flickr.com/70/229228324_08223b70fa_s.jpg" width="100" height="100" alt="" /></li>
+*/
+
+	});
+
+</script>
+</body>
+
+</html>
+
