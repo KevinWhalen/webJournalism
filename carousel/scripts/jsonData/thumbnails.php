@@ -34,17 +34,16 @@ $sth = $dbh->prepare($sql, Array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 	$data = Array();
 	$data = $sth->fetchAll();
 
-var_dump($data);
-/*
+//var_dump($data);
 	// output results as JSON
 	$rowCount = count($data);
 	echo "[" . PHP_EOL;
 	for ($i = 0; $i < $rowCount - 1; $i++){
-		echo "{\"thumbnail\":\"" . $data[$i][0] . "\"}," . PHP_EOL;
+		echo "{\"thumbnail\":\"" . $data[$i]['thumbnail'] . "\", ",
+			"\"id\":\"" . $data[$i]['id'] . "\"}," . PHP_EOL;
 	}
 	echo "{\"thumbnail\":\"" . $data[($rowCount - 1)][0] . "\"}" . PHP_EOL;
 	echo "]" . PHP_EOL;
-*/
 
 	// close connection
 	$dbh = NULL;
