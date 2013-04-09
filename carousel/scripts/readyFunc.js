@@ -26,11 +26,11 @@ function populateAllThumbnails(videoSet)
 	videoSet.forEach (function(v){
 		// Append items
 		$('.jcarousel ul')
-			.append('<li><img src="'+v.thumbnail+'" width="100" height="100" /></li>');
+//			.append('<li><img src="'+v.thumbnail+'" width="100" height="100" /></li>');
 // by id jquery click
 //			.append('<li><img id="video_'+v.id+'" src="'+v.thumbnail+'" width="100" height="100" /></li>');
 // or anchor tag. probably require <a> with lightbox
-//			.append('<li><a href="https://www.youtube.com/watch?v='+v.id+'" rel="lightbox" title="asdf"><img src="'+v.thumbnail+'" width="100" height="100" /></a></li>');
+			.append('<li><a href="https://www.youtube.com/watch?v='+v.id+'" rel="lightbox" title="asdf"><img src="'+v.thumbnail+'" width="100" height="100" /></a></li>');
 	});
 	// Reload carousel
 	$('.jcarousel').jcarousel('reload');
