@@ -11,6 +11,7 @@
 	/* You need at least a height, adjust this to your needs */
 	height: 100px;
 	width: 330px;
+	display: inline-block;
 }
 
 .jcarousel ul {
@@ -26,3 +27,26 @@
 	float: left;
 	height: 100px;
 }
+
+#carouselWarp {
+	position: relative;
+	height: 100px;
+	max-width: 500px;
+}
+
+.prev {
+	display: inline-block;
+	float: left;
+
+	position: relative;
+	top: 40px;
+}
+.next {
+	display: inline-block;
+	float: right;
+	padding-left: 10px;
+
+	position: absolute;
+	top: 40px;
+}
+
