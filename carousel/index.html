@@ -10,34 +10,6 @@
 <meta name="author" content="Kevin Whalen" />
 
 <style>
-#outerContainer {
-	width: 80%;
-	min-width: 450px;
-}
-
-#categoryTabs ul {
-	padding 0;
-}
-
-#categoryTabs ul li {
-	display: inline-block;
-	border-style: solid;
-	border-radius: 10px;
-	margin: 5px;
-	padding: 8px;
-/*	background-color: lightblue;*/
-/*	font-family:*/
-}
-#categoryTabs ul li:link, #categoryTabs ul li:visited {
-	color: black;
-}
-#categoryTabs ul li:hover {
-	cursor: pointer;
-	color: green;
-}
-#categoryTabs ul li:active {
-	color: blue;
-}
 </style>
 
 <title>Video Slideset Carousel</title>
@@ -62,6 +34,7 @@
 		</div>
 	</div>
 
+<!------------------ debugging ------------------>
 <br />
 <a href="#" id="getdata-button" title="Click to get data.">
 Query Categories</a>
@@ -75,47 +48,24 @@ Query Categories</a>
 <a data-lightbox="width:800;height:600;" href="http://www.google.com">Lightbox
 </a><br />
 <div id="showdata"></div>
+<!------------------  ------------------>
 
 </div>
 
 
-<!------------------  ------------------>
-<div id="mainRegion" style="width:80%; height:550px; border-style:none;
-		margin-left:5%; padding-left:5%; padding-right:5%;">
-
-	<!------------------  ------------------>
-	<div id="graphicArticle" style="width:80%; height:100px; 
-			border-style:none; margin-left:auto; margin-right:auto;">
-		<p id="p_article">
-		
-		</p>
-	</div>
-	<!------------------  ------------------>
-
-	<!------------------  ------------------>
-	<!--div id="slidesetCarousel" class="theCarousel"-->
-	<div id="slidesetCarousel">
-	</div>
-	<!------------------  ------------------>
-
-</div>
-<!------------------  ------------------>
 
 
 <!------------------ Style Sheets ------------------>
 <link rel="stylesheet" type="text/css" href="styles/carousel.css" />
-<link rel="stylesheet" type="text/css" href="styles/lightbox.css" />
-<!--link rel="stylesheet" type="text/css" href="styles/tango_skin.css" /-->
-<!--link rel="stylesheet" type="text/css" href="styles/main.css" /-->
+<!--link rel="stylesheet" type="text/css" href="styles/lightbox.css" /-->
 <!------------------  ------------------>
 
 <!------------------  Scripts  ------------------>
 <script type="text/javascript" src="scripts/jQuery/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="scripts/d3/d3.v3.min.js"></script>
 <script type="text/javascript" src="scripts/jCarousel/jquery.jcarousel.min.js"></script>
-<script type="text/javascript" src="scripts/lightbox.js"></script>
+<!--script type="text/javascript" src="scripts/lightbox.js"></script-->
 
-<script type="text/javascript" src="scripts/toggleVisibility.js"></script>
 <script type="text/javascript" src="scripts/readyFunc.js"></script>
 <!------------------  ------------------>
 

@@ -21,6 +21,7 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	display: inline-block;
 }
 
 .jcarousel li {
@@ -56,5 +57,36 @@
 
 	position: absolute;
 	top: 35px;
+}
+
+#outerContainer {
+	width: 80%;
+	min-width: 450px;
+	margin: 0 auto;
+}
+
+
+#categoryTabs ul {
+	padding: 0;
+}
+
+#categoryTabs ul li {
+	display: inline-block;
+	border-style: solid;
+	border-radius: 10px;
+	margin: 5px;
+	padding: 8px;
+/*	background-color: lightblue;*/
+/*	font-family:*/
+}
+#categoryTabs ul li:link, #categoryTabs ul li:visited {
+	color: black;
+}
+#categoryTabs ul li:hover {
+	cursor: pointer;
+	color: green;
+}
+#categoryTabs ul li:active {
+	color: blue;
 }
 
