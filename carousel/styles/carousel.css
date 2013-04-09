@@ -9,8 +9,8 @@
 	position: relative;
 	overflow: hidden;
 
-	height: 100px;
-	width: 330px;
+	height: 120px;
+	width: 350px;/*330*/
 	display: inline-block;
 }
 
@@ -28,12 +28,12 @@
 .jcarousel li {
 	padding-left: 10px;
 	float: left;
-	height: 100px;
+	height: 120px;
 }
 
 #carouselWarp {
 	position: relative;
-	height: 100px;
+	height: 120px;
 	max-width: 500px;
 }
 
