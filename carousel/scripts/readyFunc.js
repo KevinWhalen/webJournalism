@@ -76,7 +76,6 @@ $('#showdata').append("<p>"+cat+"</p>"); //debugging
 				$.getJSON(
 				'scripts/jsonData/thumbnails.php?category='+d.categories, 
 				function(categoryData){
-console.log(categoryData);
 					populateAllThumbnails(categoryData);
 				});
 			});
