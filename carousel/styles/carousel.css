@@ -9,9 +9,10 @@
 	position: relative;
 	overflow: hidden;
 
-	height: 120px;
-	width: 350px;/*330*/
+	height: 100px;
+	width: 330px;
 	display: inline-block;
+	top: 10px;
 }
 
 .jcarousel ul {
@@ -20,21 +21,23 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
-
-	background: none repeat scroll 0% 0% rgb(240, 246, 249);
-	border: 1px solid rgb(52, 111, 151);
 }
 
 .jcarousel li {
 	padding-left: 10px;
 	float: left;
-	height: 120px;
+	height: 100px;
 }
 
 #carouselWarp {
 	position: relative;
 	height: 120px;
-	max-width: 500px;
+	max-width: 440px;/*425*/
+	padding-left: 10px;
+
+	background: none repeat scroll 0% 0% rgb(240, 246, 249);
+	border: 1px solid rgb(52, 111, 151);
+	border-radius: 10px;
 }
 
 .prev {
@@ -42,7 +45,7 @@
 	float: left;
 
 	position: relative;
-	top: 40px;
+	top: 35px;/*50*/
 }
 .next {
 	display: inline-block;
@@ -50,6 +53,6 @@
 	padding-left: 10px;
 
 	position: absolute;
-	top: 40px;
+	top: 35px;
 }
 
