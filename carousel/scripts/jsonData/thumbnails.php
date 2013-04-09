@@ -43,7 +43,7 @@ $sth = $dbh->prepare($sql, Array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 			"\"id\":\"" . $data[$i]['id'] . "\"}," . PHP_EOL;
 	}
 	echo "{\"thumbnail\":\"" . $data[($rowCount - 1)]['thumbnail'] . "\", ",
-		"\"id\":\"" . $data[($rowCount - 1)]['id'] . "\"}," . PHP_EOL;
+		"\"id\":\"" . $data[($rowCount - 1)]['id'] . "\"}" . PHP_EOL;
 	echo "]" . PHP_EOL;
 
 	// close connection
