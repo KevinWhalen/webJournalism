@@ -8,7 +8,7 @@
 .jcarousel {
 	position: relative;
 	overflow: hidden;
-	/* You need at least a height, adjust this to your needs */
+
 	height: 100px;
 	width: 330px;
 	display: inline-block;
@@ -20,6 +20,9 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
+
+	background: none repeat scroll 0% 0% rgb(240, 246, 249);
+	border: 1px solid rgb(52, 111, 151);
 }
 
 .jcarousel li {

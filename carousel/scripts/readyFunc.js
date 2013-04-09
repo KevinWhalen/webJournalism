@@ -5,7 +5,8 @@
 */
 
 // can be used to append a single item or used inside a loop else where
-function populateCarousel(videoSet){
+function populateCarousel(videoSet)
+{
 	// Append items
 	$('.jcarousel ul')
 		.append('<li>single item</li>');
@@ -14,8 +15,11 @@ function populateCarousel(videoSet){
 	$('.jcarousel').jcarousel('reload');
 }
 
-// handing looping here
-function populateAllThumbnails(videoSet){
+// or handing looping here
+// requires: thumbnail image url as "thumbnail"
+// requires: video link identification as "id"
+function populateAllThumbnails(videoSet)
+{
 	// Flush carousel
 	$('.jcarousel ul').empty();
 	// Loop through url array
@@ -23,9 +27,18 @@ function populateAllThumbnails(videoSet){
 		// Append items
 		$('.jcarousel ul')
 			.append('<li><img src="'+v.thumbnail+'" width="100" height="100" /></li>');
+// by id jquery click
+//			.append('<li><img id="video_'+v.id+'" src="'+v.thumbnail+'" width="100" height="100" /></li>');
+// or anchor tag. probably require <a> with lightbox
+//			.append('<li><a href="https://www.youtube.com/watch?v='+v.id+'" rel="lightbox" title="asdf"><img src="'+v.thumbnail+'" width="100" height="100" /></a></li>');
 	});
 	// Reload carousel
 	$('.jcarousel').jcarousel('reload');
+}
+
+// uses video titles and descriptions
+function lightboxDetails(data)
+{
 }
 
 
@@ -60,39 +73,29 @@ $(document).ready(function(){
 $('#showdata').append("<p>"+cat+"</p>"); //debugging
 				$.getJSON(
 				'scripts/jsonData/thumbnails.php?category='+d.categories, 
-				function(data){	
-					populateAllThumbnails(data);
+				function(categoryData){
+					populateAllThumbnails(categoryData);
 				});
 			});
-	//		$('#showdata').append("<p>"+d.categories+"</p>");
-		});
-	});
-
 /*
-	$('.categoryTabs ul li').click(function(){
-		$.getJSON($.post('scripts/jsonData/thumbnails.php', {category: d.categories}), function(data){	
-			populateAllThumbnails(data);
-		});
-	});
-
-	$('.categoryTabs ul li').click(function(){
-		$.post('scripts/jsonData/thumbnails.php', {variable: this.html()});
-		$.getJSON('scripts/jsonData/thumbnails.php', function(data){	
-			populateAllThumbnails(data);
-		});
-	});
-
-	$('#getdata-button').click(function(){
-		$.getJSON('scripts/jsonData/thumbnails.php', function(data){	
-			populateAllThumbnails(data);
-		});
-	});
+			$('#video_'+id).click(function(){
+				$.getJSON(
+				'scripts/jsonData/details.php?video='+d.id, 
+				function(data){
+					lightboxDetails(data);
+				});
+			});
 */
-	$('#getdata-button').click(function(){
-		$.getJSON('scripts/jsonData/thumbnails.php', function(data){	
-			populateAllThumbnails(data);
 		});
 	});
+
+// *debugging*
+// load default (suicide) here instead of at page load
+$('#getdata-button').click(function(){
+	$.getJSON('scripts/jsonData/thumbnails.php', function(data){	
+		populateAllThumbnails(data);
+	});
+});
 
 });
 
@@ -106,6 +109,15 @@ $('#showdata').append("<p>"+cat+"</p>"); //debugging
 		var width = window.innerWidth * 0.77;
 		var height = width * 0.50;
 		//resizeFrame(width, height);
+	});
+*/
+
+/*
+	$('.categoryTabs ul li').click(function(){
+		$.post('scripts/jsonData/thumbnails.php', {variable: this.html()});
+		$.getJSON('scripts/jsonData/thumbnails.php', function(data){	
+			populateAllThumbnails(data);
+		});
 	});
 */
 
