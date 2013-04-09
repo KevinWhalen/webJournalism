@@ -24,7 +24,7 @@ try {
 		"$dbuser", "$dbpass");
 
 	// query
-	$sql = "SELECT thumbnail_default AS thumbnail 
+	$sql = "SELECT thumbnail_default AS thumbnail, videoId as id  
 			FROM video 
 			WHERE category = :calories";
 
@@ -34,6 +34,8 @@ $sth = $dbh->prepare($sql, Array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 	$data = Array();
 	$data = $sth->fetchAll();
 
+var_dump($data);
+/*
 	// output results as JSON
 	$rowCount = count($data);
 	echo "[" . PHP_EOL;
@@ -42,6 +44,7 @@ $sth = $dbh->prepare($sql, Array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 	}
 	echo "{\"thumbnail\":\"" . $data[($rowCount - 1)][0] . "\"}" . PHP_EOL;
 	echo "]" . PHP_EOL;
+*/
 
 	// close connection
 	$dbh = NULL;
