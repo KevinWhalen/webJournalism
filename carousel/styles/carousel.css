@@ -21,7 +21,6 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	display: inline-block;
 }
 
 .jcarousel li {
@@ -30,34 +29,6 @@
 	height: 100px;
 }
 
-#carouselWarp {
-	position: relative;
-	height: 120px;
-	max-width: 440px;/*425*/
-	padding-left: 10px;
-	margin-left: auto;
-	margin-right: auto;
-
-	background: none repeat scroll 0% 0% rgb(240, 246, 249);
-	border: 1px solid rgb(52, 111, 151);
-	border-radius: 10px;
-}
-
-.prev {
-	display: inline-block;
-	float: left;
-
-	position: relative;
-	top: 35px;/*50*/
-}
-.next {
-	display: inline-block;
-	float: right;
-	padding-left: 10px;
-
-	position: absolute;
-	top: 35px;
-}
 
 #outerContainer {
 	width: 80%;
@@ -88,5 +59,35 @@
 }
 #categoryTabs ul li:active {
 	color: blue;
+}
+
+
+#carouselWarp {
+	position: relative;
+	height: 120px;
+	max-width: 440px;/*425*/
+	padding-left: 10px;
+	margin-left: auto;
+	margin-right: auto;
+
+	background: none repeat scroll 0% 0% rgb(240, 246, 249);
+	border: 1px solid rgb(52, 111, 151);
+	border-radius: 10px;
+}
+
+.prev {
+	display: inline-block;
+	float: left;
+
+	position: relative;
+	top: 35px;/*50*/
+}
+.next {
+	display: inline-block;
+	float: right; left: 390px;
+	padding-left: 10px;
+
+	position: absolute;
+	top: 35px;
 }
 
