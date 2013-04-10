@@ -19,7 +19,7 @@ function initiateGraphic(w = 800, h = 360)
 	var barOffsetY = frameHeight * 0.49;
 	var barLength = frameWidth * 0.92; // was 88% when w was 77%
 	var barThickness = frameHeight * 0.015;
-	var legendWidth = (frameWidth * 0.05)
+	var legendWidth = frameWidth * 0.05;
 
 	// icon diameter for width/height and such
 	var iconDiameter = frameHeight * 0.12; // was 15%
@@ -66,6 +66,7 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 
 
 //---------------------------------------------------------------------------
+	// container
 	d3.select("body").select("#container").append("div")
 		.attr("id", "graphicRegion")
 		.attr("width", frameWidth)
@@ -77,7 +78,7 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 		.style("margin-left", "auto")
 		.style("margin-right", "auto");
 
-	// container
+	// graphic
 	var svg = d3.select("body").select("#graphicRegion").append("svg")
 		.attr("xmlns", "http://www.w3.org/2000/svg")
 		.attr("xlink", "http://www.w3.org/1999/xlink")
