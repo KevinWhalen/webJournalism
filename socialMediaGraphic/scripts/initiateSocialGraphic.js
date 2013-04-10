@@ -219,21 +219,16 @@ titleData.forEach(function(d,i,a){
 	function categoryPosition(idx, sIdx)
 	{
 // SCOPE?
-/*
-		var offset = barLength * 0.10;
-		var totalOffset = barOffsetX + offset;
-		var portion = ((barLength - (offset * 2)) / (titleCount - 1)) * idx;
-		return totalOffset + portion;
-*/
-
-		var segment = barLength + (barLength * 0.10);
+		var segment = barLength + (barLength * 0.07);
 		var offsetX = legendWidth + iconDiameter;//(iconDiameter / 2);
-		var centerY = barOffsetY - (iconDiameter / 2);
+		//var centerY = barOffsetY - (iconDiameter / 2);
 
 		var exposeRight = segment * 0.10;
 		var reducedSegment = (segment - (exposeRight * 2));
-		var portion = ((reducedSegment / (titleCount - 1)) * idx) + (sIdx * 20);
-		return offsetX + portion;
+		var portion = ((reducedSegment / (titleCount - 1)) * idx);
+console.log(segment + " sIdx: " + sIdx + " : " + offsetX + ", " + portion + ", " + (sIdx * (iconDiameter * 0.50)));
+		return offsetX + portion + (sIdx * (iconDiameter * 0.50));
+// compare this to x-axis positioning in title icon animation
 	}
 
   // articles per media site 
@@ -260,7 +255,8 @@ titleData.forEach(function(d,i,a){
 			.attr("width", (iconDiameter * 0.60))
 			.attr("height", (iconDiameter * 0.60))
 			// give title icon starting "x" location and hide initially
-			.attr("x", categoryPosition(i, sID))
+//position minus half the difference between bar width and category icon size
+			.attr("x", categoryPosition(i, sID) - (iconDiameter * 0.10))
 			.attr("y", (barOffsetY - (iconDiameter / 2)))
 			.style("z-index", 6)
 			.style("display", "none");

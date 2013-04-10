@@ -12,7 +12,8 @@
 function animateGraphic(barLength, legendWidth, height, titleCount, iconDiameter)
 //function animateGraphic(settings)
 {
-	var segment = barLength + (barLength * 0.06);
+	// may have correlating category X-Axis position scaling values
+	var segment = barLength + (barLength * 0.07);//6
 	var offsetX = legendWidth;// + (iconDiameter / 2); // no bar edge show now
 	titleCount = titleCount;
 	var centerY = height * 0.49;// - (iconDiameter / 2); // bad abstraction
@@ -45,9 +46,10 @@ function animateGraphic(barLength, legendWidth, height, titleCount, iconDiameter
 			// Written to allow for a variable number of sites, but 
 			// doesnt account for diameter of icons.
 			var exposeRight = segment * 0.10;
-			var totalOffset = offsetX;// + offset;
-			var portion = ((segment - (exposeRight * 2)) / (titleCount - 1)) * i;
-			return totalOffset + portion;
+			var reducedSegment = segment - (exposeRight * 2);
+			var portion = (reducedSegment / (titleCount - 1)) * i;
+console.log(segment + " i: " + i + " : " + offsetX + ", " + portion);
+			return offsetX + portion;
 			});
 
 		// this transition will be on the category objects
