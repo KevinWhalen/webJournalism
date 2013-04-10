@@ -6,10 +6,11 @@
  * Array.forEach(function(element, index, array){});
 */
 
+// 2013-04-08 : 7 websites fits to height as 45% width.
 
 // Scaled to width and height. The graphic is balanced for a 2:1 ratio of w:h.
 //function initiateGraphic(w = 800, h = 400, global data object)
-function initiateGraphic(w = 800, h = 400)
+function initiateGraphic(w = 800, h = 360)
 {
 	// variables. coordinates origin is upper left.
 	var frameWidth = w;
@@ -87,7 +88,7 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 		.attr("stroke-width", 0)
 		// transition graphic
 		.on("mouseover", function(d,i){
-			animateGraphic(barLength, legendWidth, barOffsetY, titleCount, iconDiameter);
+			animateGraphic(barLength, legendWidth, frameHeight, titleCount, iconDiameter);
 			//animateGraphic(barLength, (barOffsetX - (iconDiameter / 2)), titleCount, (barOffsetY - (iconDiameter / 2)));
 		})
 		// transition back to starting state

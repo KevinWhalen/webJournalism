@@ -4,18 +4,35 @@
  * 2/17/13
 */
 
+		// Removed exposed ends, but remains title count independent.
 			// The 10% for the exposed ends of the center bar should instead 
 			// be dependent on the number of titles.
 
 
-function animateGraphic(segment, legendWidth, barOffsetY, titleCount, iconDiameter)
+function animateGraphic(barLength, legendWidth, height, titleCount, iconDiameter)
 //function animateGraphic(settings)
 {
-	segment = segment + (segment * 0.06);
-	//offsetX = barOffsetX;
-	offsetX = legendWidth;// + (iconDiameter / 2);
+	var segment = barLength + (barLength * 0.06);
+	var offsetX = legendWidth;// + (iconDiameter / 2); // no bar edge show now
 	titleCount = titleCount;
-	var centerY = barOffsetY;// - (iconDiameter / 2);
+	var centerY = height * 0.49;// - (iconDiameter / 2); // bad abstraction
+	var catIconD = iconDiameter * 0.60;//reference: initiate article per media site
+
+	var rankDomain = [5,4,3,2,1,0,-1,-2,-3,-4,-5];
+	var rankRangeCount = 11; // -5 through 5
+	// calculate output range set for category locations
+	var offsetHeight = height - (height * 0.05); // 2.5% padding on top/bottom
+	var increment = offsetHeight / rankRangeCount;
+	var hRange = new Array;
+	var topOffset = height * 0.025;
+	for (var i = 0; i < rankRangeCount; i++){
+		hRange.push(topOffset + (i * increment));
+	}
+
+	// maps rank "in" domain to "out" height range
+	var mapRating = d3.scale.quantize()
+		.domain(rankDomain)
+		.range(hRange);
 
 	// each researched website has an entry.
 	window.researchData.forEach(function(d,i,a){
@@ -41,16 +58,9 @@ function animateGraphic(segment, legendWidth, barOffsetY, titleCount, iconDiamet
 			.duration(2500)
 			.style("display", "block")
 			.attr("y", function(){
-	/*          var mapRating = d3.scale.linear()
-				  .domain(-5, 5)
-				  .range(barOffsetX, ((segment / 2) + (barOffsetX / 2)));
-	*/
 				var position = s["rating"];
-	//          position = mapRating(position);
-
-
-				//.attr("y", centerY - ((iconDiameter * 0.9) / 2))
-				return (centerY - position * 20); // was 15
+				position = mapRating(position);
+				return position;
 			});
 		  // transition of the bars that match to categories to their height
 		  d3.select("#bar_" + d["name"] + "_" + s["shape"])
@@ -58,36 +68,26 @@ function animateGraphic(segment, legendWidth, barOffsetY, titleCount, iconDiamet
 			.delay(2700)
 			.duration(2500)
 			.style("display", "block")
-	// works for positive. need opposite for negative
 			.attr("y", function(){
 				var position = s['rating'];
-	//			position = mapRating(position);
-				position *= 20; // until map by frame height is figured out
-				if (position >= 0){
-					position = centerY - position;
+				position = mapRating(position);
+				if (s['rating'] >= 0){
+					position += catIconD;
 				} else {
 					position = centerY;
 				}
 				return position;
-			})// + iconDiameter * 0.60))
+			})
 			.attr("height", function(){
-				var barHeight = s['rating'] * 20;
-				if (barHeight < 0) barHeight *= (-1);
+				var barHeight = s['rating'];
+				barHeight = mapRating(barHeight);
+				if (s['rating'] >= 0){
+					barHeight = centerY - (barHeight + catIconD);
+				} else {
+					barHeight = barHeight - centerY;
+				}
 				return barHeight;
-			})// - iconDiameter * 0.60)
-/*
-			.attr("height", function(){
-//	          var mapRating = d3.scale.linear()
-//				  .domain(-5, 5)
-//				  .range(barOffsetX, ((segment / 2) + (barOffsetX / 2)));
-			  var position = s["rating"];
-	//          position = mapRating(position);
-
-
-				//.attr("y", centerY - ((iconDiameter * 0.9) / 2))
-			  //return (centerY - position * 20); // was 15
-			  return (position * 20); // was 15
-			})*/;
+			});
 		});
 	});
 }

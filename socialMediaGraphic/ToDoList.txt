@@ -1,23 +1,15 @@
 
 --  To Do List  -----------------------------------------------------
 
-fix category icon sizing (too large and have transparent border).
+perfect category locations (position, spacing). to the right of title icons.
 
-scale/map ratings to frame height positions. (frameHeight) currently rating * 10
-
-	transition category shapes and their reverse transitions.
+transition category shapes and their reverse transitions.
 
 2013-03-07 : established colors to be used in scale.
 
 	map ratings to color scale for category shape fill colors.
 
-toggle function to show reverse animation for onclick main graphic.
-
-
-export data to report/research JSON file.
-
 refactor titleData variable.
-
 
 icons start as hidden.
 
@@ -49,4 +41,14 @@ lightbox "title - category - rating\n write up"
 2013-03-08 : add import report data php script.
 
 2013-03-14 : add category shapes.
+
+toggle function to show reverse animation for onclick main graphic.
+
+export data to report/research JSON file.
+
+fix category icon sizing (too large and have transparent border).
+
+2013-03-00 : new formatting of categories decided on.
+
+2013-04-09 : scale/map ratings to frame height positions. (frameHeight)
 
