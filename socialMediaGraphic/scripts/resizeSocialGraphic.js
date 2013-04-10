@@ -4,7 +4,8 @@
  * 2/17/13
 */
 
-function resizeGraphic(w = 800, h = 360)
+//function resizeGraphic(w = 800, h = 360)
+function resizeGraphic(w, h)
 {
 	// variables. coordinates origin is upper left.
 	var frameWidth = w;

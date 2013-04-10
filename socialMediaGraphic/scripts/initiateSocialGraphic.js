@@ -9,8 +9,8 @@
 // 2013-04-08 : 7 websites fits to height as 45% width.
 
 // Scaled to width and height. The graphic is balanced for a 2:1 ratio of w:h.
-//function initiateGraphic(w = 800, h = 400, global data object)
-function initiateGraphic(w = 800, h = 360)
+//function initiateGraphic(w = 800, h = 360)
+function initiateGraphic(w, h)
 {
 	// variables. coordinates origin is upper left.
 	var frameWidth = w;
