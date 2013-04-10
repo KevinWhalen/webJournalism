@@ -127,53 +127,43 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 
 
 //---------------------------------------------------------------------------
-// GIVE UP ON GRADIENT FOR NOW. FOCUS ON RELAYING OUT ICONS AND ADDING ICON BARS
 	// define the fill gradient
 	var gradient = svg.append("svg:defs")
 		.append("svg:linearGradient")
 			.attr("id", "gradient")
 			.attr("x1", "0%")
+			.attr("y1", "0%")
 			.attr("x2", "0%")
-			.attr("y1", "100%")
 			.attr("y2", "100%")
-			.attr("spreadMethod", "pad");
-			//.attr("gradientUnits", "userSpaceOnUse");
-
-	gradient.append("stop")
+			.attr("gradientUnits", "userSpaceOnUse");
+	gradient.append("svg:stop")
 		.attr("offset", "0%")
-		.attr("stop-color", "#000000")
+		.attr("stop-color", "#edf1f4")
 		.attr("stop-opacity", 1);
-
-	gradient.append("stop")
+	gradient.append("svg:stop")
+		.attr("offset", "48%")
+		.attr("stop-color", "#7a98b0")
+		.attr("stop-opacity", 1);
+	gradient.append("svg:stop")
+		.attr("offset", "52%")
+		.attr("stop-color", "#7a98b0")
+		.attr("stop-opacity", 1);
+	gradient.append("svg:stop")
 		.attr("offset", "100%")
-		.attr("stop-color", "#829CAB")
+		.attr("stop-color", "#425769")
+		//.attr("stop-color", "#829CAB")
 		.attr("stop-opacity", 1);
 
-	// vertical bar legend 
+	// vertical bar: legend 
 	svg.append("rect")
 		.attr("width", legendWidth)
-		.attr("height", frameHeight)
+		.attr("height", (frameHeight - (frameHeight * 0.05))) //same padding as category icon maximums
 		.attr("x", 0)
-		.attr("y", 0)
+		.attr("y", (frameHeight * 0.025))
 		.attr("id", "legendBar")
 		.style("z-index", 1)
-		.attr("fill", "url(#gradient)"); // blue
+		.attr("fill", "url(#gradient)");
 //		.attr("fill", "#829CAB"); // blue
-
-
-/*
-// fill gradient backup plan - CSS3
-// Safari 4-5, Chrome 1-9 : Safari 5.1, Chrome 10+ : Firefox 3.6+ : IE 10 : Opera 11.10+
-background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1a82f7), to(#2F2727)); 
-background: -webkit-linear-gradient(top, #2F2727, #1a82f7);
-background: -moz-linear-gradient(top, #2F2727, #1a82f7);
-background: -ms-linear-gradient(top, #2F2727, #1a82f7);
-background: -o-linear-gradient(top, #2F2727, #1a82f7);
-// fill gradient CSS fallback
-background-color: #1a82f7;
-background: url(images/one_pixel_wide_gradient_strip.png);
-background-repeat: repeat-x;
-*/
 
 
 //---------------------------------------------------------------------------
@@ -219,14 +209,13 @@ titleData.forEach(function(d,i,a){
 	function categoryPosition(idx, sIdx)
 	{
 // SCOPE?
+		// may have correlating title icon X-Axis position scaling values
 		var segment = barLength + (barLength * 0.07);
 		var offsetX = legendWidth + iconDiameter;//(iconDiameter / 2);
-		//var centerY = barOffsetY - (iconDiameter / 2);
 
 		var exposeRight = segment * 0.10;
 		var reducedSegment = (segment - (exposeRight * 2));
 		var portion = ((reducedSegment / (titleCount - 1)) * idx);
-console.log(segment + " sIdx: " + sIdx + " : " + offsetX + ", " + portion + ", " + (sIdx * (iconDiameter * 0.50)));
 		return offsetX + portion + (sIdx * (iconDiameter * 0.50));
 // compare this to x-axis positioning in title icon animation
 	}
@@ -240,10 +229,8 @@ console.log(segment + " sIdx: " + sIdx + " : " + offsetX + ", " + portion + ", "
 		var categoryGroup = svg.select("#g_" + d["name"]).append("rect")
 			.attr("id", "bar_" + d["name"] + "_" + s["shape"])
 			.attr("width", (iconDiameter * 0.40))
-//			.attr("height", (barOffsetY - (iconDiameter / 2)))
 			.attr("height", 0)
 			.attr("x", categoryPosition(i, sID))
-//			.attr("y", (barOffsetY - (iconDiameter / 2)))
 			.attr("y", centerY)
 			.style("z-index", 6)
 			.style("display", "none")

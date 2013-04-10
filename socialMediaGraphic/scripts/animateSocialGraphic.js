@@ -12,11 +12,12 @@
 function animateGraphic(barLength, legendWidth, height, titleCount, iconDiameter)
 //function animateGraphic(settings)
 {
+var barThickness = height * 0.015; // copied from initiate
+	var centerY = height * 0.49 + (barThickness / 2); // bad abstraction
 	// may have correlating category X-Axis position scaling values
 	var segment = barLength + (barLength * 0.07);//6
 	var offsetX = legendWidth;// + (iconDiameter / 2); // no bar edge show now
 	titleCount = titleCount;
-	var centerY = height * 0.49;// - (iconDiameter / 2); // bad abstraction
 	var catIconD = iconDiameter * 0.60;//reference: initiate article per media site
 
 	var rankDomain = [5,4,3,2,1,0,-1,-2,-3,-4,-5];
@@ -48,7 +49,6 @@ function animateGraphic(barLength, legendWidth, height, titleCount, iconDiameter
 			var exposeRight = segment * 0.10;
 			var reducedSegment = segment - (exposeRight * 2);
 			var portion = (reducedSegment / (titleCount - 1)) * i;
-console.log(segment + " i: " + i + " : " + offsetX + ", " + portion);
 			return offsetX + portion;
 			});
 
