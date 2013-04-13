@@ -1,20 +1,22 @@
 Words in quotations are exact researchData attributes from the data object array.
-Examples using the "name" facebook.
+Examples using the "name" Facebook.
 
 Each website is represented inside of a logical container, SVG Group:
-	#g_facebook
+	#g_Facebook
 
 The website title icon container is a SVG:
-	#svg_facebook
+	#svg_Facebook
 
-The image inside of the title container:
-	#img_facebook
+	The image inside of the title container:
+		#img_Facebook
 
-Each group then contains three "category" "shape"s as SVGs with images inside:
-	#facebok_diamond (square, triangle)
-		#img_facebook_diamond (square, triangle)
+Each group then contains three "category" "shape"s as SVGs:
+	#Facebook_diamond (square, triangle)
+
+	With images inside:
+		#img_Facebook_diamond (square, triangle)
 
 The group also contains three bars, one relating to each "shape":
-	#bar_facebook_diamond (square, triangle)
+	#bar_Facebook_diamond (square, triangle)
 
 

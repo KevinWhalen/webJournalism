@@ -94,11 +94,11 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 		})
 		// transition back to starting state
 		.on("mouseout", function(d,i){
-			reverseGraphic((barOffsetX - (iconDiameter / 2)), (barOffsetY - (iconDiameter / 2)));
+//			reverseGraphic((barOffsetX - (iconDiameter / 2)), (barOffsetY - (iconDiameter / 2)));
 		}) 
 		.on("click", function(d,i){
 // write toggle function
-			animateGraphic(barLength, (barOffsetX - (iconDiameter / 2)), titleCount, (barOffsetY - (iconDiameter / 2)));
+			animateGraphic(barLength, legendWidth, frameHeight, titleCount, iconDiameter);
 		})
 		.style("z-index", 10)
 		.style("margin-left", "auto")
@@ -163,8 +163,27 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 		.attr("y", (frameHeight * 0.025))
 		.attr("id", "legendBar")
 		.style("z-index", 1)
-		.attr("fill", "url(#gradient)");
-//		.attr("fill", "#829CAB"); // blue
+		.attr("fill", "url(#gradient)");//.attr("fill", "#829CAB"); // blue
+
+	// legend key
+	svg.append("text")
+		.attr("x", (legendWidth / 3))
+		.attr("y", legendWidth)
+//SCALE FONT-SIZE
+		.style("font-size", "2em")
+		.style("fill", "white")
+		.attr("stroke", "black")
+		.attr("stroke-width", 0.5)
+		.text(" 5");
+	svg.append("text")
+		.attr("x", (legendWidth / 5))
+//ADJUST HEIGHT ON RESIZE
+		.attr("y", (frameHeight - (legendWidth / 2)))
+		.style("font-size", "2em")
+		.style("fill", "white")
+		.attr("stroke", "black")
+		.attr("stroke-width", 0.5)
+		.text("-5");
 
 
 //---------------------------------------------------------------------------
@@ -198,8 +217,31 @@ titleData.forEach(function(d,i,a){
 		 svg.select("#img_" + d["name"])
 			.attr("xlink:title", d["name"])
 			.attr("width", iconDiameter)
-			.attr("height", iconDiameter);
-//			.on("click", );
+			.attr("height", iconDiameter)
+			.on("mouseover", function(){
+				d["category"].forEach(function(s, sID){
+					svg.select("#" + d["name"] + "_" + s["shape"])
+						.attr("stroke", "black")
+						.attr("stroke-width", 1);
+					svg.select("#bar_" + d["name"] + "_" + s["shape"])
+						//.style("box-shadow", "0px 0px 20px #888888")
+						//.style("fill", "lightblue")
+						.attr("stroke", "black")
+						.attr("stroke-width", 1);
+				});
+			})
+			.on("mouseout", function(){
+				d["category"].forEach(function(s, sID){
+					svg.select("#" + d["name"] + "_" + s["shape"])
+						.attr("stroke-width", 0);
+					svg.select("#bar_" + d["name"] + "_" + s["shape"])
+						//.style("fill", "url(#gradient)")
+						.attr("stroke-width", 0);
+				});
+			})
+			.on("click", function(){
+				//toggle
+			});
 	});
 });
 
@@ -209,7 +251,6 @@ titleData.forEach(function(d,i,a){
 	// helper function for setting X-Axis position of categories.
 	function categoryPosition(idx, sIdx)
 	{
-// SCOPE?
 		// may have correlating title icon X-Axis position scaling values
 		var segment = barLength + (barLength * 0.07);
 		var offsetX = legendWidth + iconDiameter;//(iconDiameter / 2);
@@ -235,6 +276,7 @@ titleData.forEach(function(d,i,a){
 			.attr("y", centerY)
 			.style("z-index", 6)
 			.style("display", "none")
+			.attr("title", s["rating"])
 			.attr("fill", "url(#gradient)");
 
 		svg.select("#svg_" + s["shape"])
@@ -251,7 +293,7 @@ titleData.forEach(function(d,i,a){
 
 		svg.select("#img_" + s["shape"])
 			.attr("id", "#img_" + d["name"] + "_" + s["shape"])
-			.attr("xlink:title", s["shape"])
+			.attr("xlink:title", s["rating"])
 			.attr("width", (iconDiameter * 0.60))
 			.attr("height", (iconDiameter * 0.60));
 
