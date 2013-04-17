@@ -126,8 +126,10 @@ function resizeGraphic(w, h)
     });
   });
 
-// after where resize is called (on window resize) clear graphic, wait, resize again, animate.
-//animateGraphic(barLength, legendWidth, frameHeight, titleCount, iconDiameter);
+animateGraphic(barLength, legendWidth, frameHeight, titleCount, iconDiameter);
+// Instead it might need to be something like:
+// After where resize is called (on window resize) clear graphic, 
+// wait, resize again, animate.
 
 }
 
