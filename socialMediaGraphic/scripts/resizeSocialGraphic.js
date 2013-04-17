@@ -53,6 +53,16 @@ function resizeGraphic(w, h)
 		.attr("height", (frameHeight - (frameHeight * 0.05)))
 		.attr("y", (frameHeight * 0.025));
 
+	// legend key
+	svg.select("upperLegendKey")
+		.attr("x", (legendWidth / 3))
+		.attr("y", legendWidth)
+		.style("font-size", (legendWidth * 0.65) + "px");
+	svg.select("lowerLegendKey")
+		.attr("x", (legendWidth / 5))
+		.attr("y", (frameHeight - (legendWidth / 2)))
+		.style("font-size", (legendWidth * 0.65) + "px");
+
 
 //---------------------------------------------------------------------------
 // Media Title Circles
@@ -116,7 +126,8 @@ function resizeGraphic(w, h)
     });
   });
 
-animateGraphic(barLength, legendWidth, frameHeight, titleCount, iconDiameter);
+// after where resize is called (on window resize) clear graphic, wait, resize again, animate.
+//animateGraphic(barLength, legendWidth, frameHeight, titleCount, iconDiameter);
 
 }
 

@@ -167,6 +167,7 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 
 	// legend key
 	svg.append("text")
+		.attr("id", "upperLegendKey")
 		.attr("x", (legendWidth / 3))
 		.attr("y", legendWidth)
 //SCALE FONT-SIZE
@@ -176,9 +177,10 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 		.attr("stroke-width", 0.5)
 		.text(" 5");
 	svg.append("text")
+		.attr("id", "lowerLegendKey")
 		.attr("x", (legendWidth / 5))
-//ADJUST HEIGHT ON RESIZE
 		.attr("y", (frameHeight - (legendWidth / 2)))
+//SCALE FONT-SIZE
 		.style("font-size", "2em")
 		.style("fill", "white")
 		.attr("stroke", "black")
