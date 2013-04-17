@@ -294,10 +294,13 @@ titleData.forEach(function(d,i,a){
 			.style("display", "none");
 
 		svg.select("#img_" + s["shape"])
-			.attr("id", "#img_" + d["name"] + "_" + s["shape"])
+			.attr("id", "img_" + d["name"] + "_" + s["shape"])
 			.attr("xlink:title", s["rating"])
 			.attr("width", (iconDiameter * 0.60))
-			.attr("height", (iconDiameter * 0.60));
+			.attr("height", (iconDiameter * 0.60))
+			.on("click", function(){
+				alert(s['title'] + "\n " + s['text']);
+			});
 
 //.attr("fill", "dodgerblue")
 //.attr("text-anchor", "middle")
