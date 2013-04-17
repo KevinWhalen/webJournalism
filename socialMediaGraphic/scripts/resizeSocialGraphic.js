@@ -57,11 +57,11 @@ function resizeGraphic(w, h)
 	svg.select("#upperLegendKey")
 		.attr("x", (legendWidth / 3))
 		.attr("y", legendWidth)
-		.style("font-size", (legendWidth * 0.65) + "px");
+		.style("font-size", (legendWidth * 0.70) + "px");
 	svg.select("#lowerLegendKey")
 		.attr("x", (legendWidth / 5))
 		.attr("y", (frameHeight - (legendWidth / 2)))
-		.style("font-size", (legendWidth * 0.65) + "px");
+		.style("font-size", (legendWidth * 0.70) + "px");
 
 
 //---------------------------------------------------------------------------

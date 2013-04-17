@@ -170,8 +170,7 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 		.attr("id", "upperLegendKey")
 		.attr("x", (legendWidth / 3))
 		.attr("y", legendWidth)
-//SCALE FONT-SIZE
-		.style("font-size", "2em")
+		.style("font-size", (legendWidth * 0.70) + "px") // 2em at width=930px
 		.style("fill", "white")
 		.attr("stroke", "black")
 		.attr("stroke-width", 0.5)
@@ -180,8 +179,7 @@ document.getElementById("p_article").innerHTML = chartRating(-4);
 		.attr("id", "lowerLegendKey")
 		.attr("x", (legendWidth / 5))
 		.attr("y", (frameHeight - (legendWidth / 2)))
-//SCALE FONT-SIZE
-		.style("font-size", "2em")
+		.style("font-size", (legendWidth * 0.70) + "px")
 		.style("fill", "white")
 		.attr("stroke", "black")
 		.attr("stroke-width", 0.5)
@@ -222,7 +220,8 @@ titleData.forEach(function(d,i,a){
 			.attr("height", iconDiameter)
 			.on("mouseover", function(){
 				d["category"].forEach(function(s, sID){
-					svg.select("#" + d["name"] + "_" + s["shape"])
+					//svg.select("#" + d["name"] + "_" + s["shape"])
+					svg.select("#img_" + d["name"] + "_" + s["shape"])
 						.attr("stroke", "black")
 						.attr("stroke-width", 1);
 					svg.select("#bar_" + d["name"] + "_" + s["shape"])
@@ -234,7 +233,8 @@ titleData.forEach(function(d,i,a){
 			})
 			.on("mouseout", function(){
 				d["category"].forEach(function(s, sID){
-					svg.select("#" + d["name"] + "_" + s["shape"])
+					//svg.select("#" + d["name"] + "_" + s["shape"])
+					svg.select("#img_" + d["name"] + "_" + s["shape"])
 						.attr("stroke-width", 0);
 					svg.select("#bar_" + d["name"] + "_" + s["shape"])
 						//.style("fill", "url(#gradient)")
@@ -299,7 +299,7 @@ titleData.forEach(function(d,i,a){
 			.attr("width", (iconDiameter * 0.60))
 			.attr("height", (iconDiameter * 0.60))
 			.on("click", function(){
-				alert(s['title'] + "\n " + s['text']);
+				alert(s['title'] + " Rating: " + s['rating'] + "\n" + s['text']);
 			});
 
 //.attr("fill", "dodgerblue")
