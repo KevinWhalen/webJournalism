@@ -2,8 +2,6 @@
  * 
  * Kevin Whalen
  * 2/17/13
- *
- * Array.forEach(function(element, index, array){});
 */
 
 // 2013-04-08 : 7 websites fits to height as 45% width.
@@ -24,13 +22,11 @@ function initiateGraphic(w, h)
 	// icon diameter for width/height and such
 	var iconDiameter = frameHeight * 0.12; // was 15%
 
-// refactor how variables are used in function calls
   // build attribute array for use of passing the above variables to functions
 /*	var attrs = [{'frameWidth': frameWidth}, {'frameHeight': frameHeight}, 
 				{'barOffsetX': barOffsetX}, {'barOffsetY': barOffsetY}, 
 				{'barLength': barLength}, {'iconDiameter': iconDiameter}];
 */
-
 
 	// global data object
 	var titleData = window.researchData;
@@ -40,6 +36,7 @@ function initiateGraphic(w, h)
 
 //==============================================================
 // color scale
+// Currently just have use fill radients.
 /*
 	// scale rating to value inside height (top-down, 0 to frameHeight)
 	var chartRating = d3.scale.linear()

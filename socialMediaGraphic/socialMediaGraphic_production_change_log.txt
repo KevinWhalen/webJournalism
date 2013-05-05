@@ -1,0 +1,11 @@
+
+script paths in article.html  (index)
+
+image paths as "icon" in data/webSiteRatings.js (7)
+%s/"icon": "/"icon": "\/images\/socialMedia\//g
+
+image paths as "file" in data/webSiteRatings.js (21)
+%s/"file": "/"file": "\/images\/socialMedia\//g
+
+background-image path in scripts/initiateGraphic.js under container div
+
