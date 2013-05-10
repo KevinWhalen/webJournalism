@@ -22,7 +22,8 @@
 Click on any of the shapes to learn more about the rating:</b></p>
 
 <!--------------  SVG Grapic Code Inserted  -------------->
-<div id="container" style="margin-left:4%;">
+<!--div id="container" style="margin-left:4%;"-->
+<div id="container">
 
 </div>
 <!--------------  -------------->
@@ -58,7 +59,9 @@ Click on any of the shapes to learn more about the rating:</b></p>
 
 	var width = window.innerWidth * 0.90; // was 77%
 	var height = width * 0.45; // window.innerHeight
+	drawCategoryLegend(width, height);
 	// initiateGraphic with or without a defined (width,height) pair
+		// actually default parameters seems to only work in firefox.
 	initiateGraphic(width, height);
 </script>
 </body>

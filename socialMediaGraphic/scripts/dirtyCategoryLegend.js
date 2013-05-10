@@ -1,5 +1,5 @@
-    var w = 660;
-    var h = w * 0.45;
+
+function drawCategoryLegend(w, h){
     // variables. coordinates origin is upper left.
     var frameWidth = w;
     var frameHeight = h;
@@ -87,4 +87,6 @@ categories.forEach(function(s, sID){
 			.text(s["title"]);
 	});
 });
+
+}
 
