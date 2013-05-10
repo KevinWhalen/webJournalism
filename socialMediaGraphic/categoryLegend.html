@@ -117,10 +117,9 @@
 				.attr("height", (iconDiameter * 0.60))
 //				.attr("x", categoryPosition(i,0) - (iconDiameter * 0.10))
 //				.attr("y", (barOffsetY - (iconDiameter / 2)))
-				.attr("x", 50)
-				.attr("y", 50)
-				.style("z-index", 6)
-				.style("display", "none");
+				.attr("x", 300)
+				.attr("y", (i * iconDiameter * 0.50) + 10)
+				.style("z-index", 6);
 
 			svg.select("#img_" + categories[i]["shape"])
 				.attr("id", "img_" + "legend_" + categories[i]["shape"])
