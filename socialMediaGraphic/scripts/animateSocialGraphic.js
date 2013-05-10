@@ -64,7 +64,7 @@ var barThickness = height * 0.015; // copied from initiate
 				position = mapRating(position);
 				return position;
 			});
-		  // transition of the bars that match to categories to their height
+		  // transition of the bars that match to categories and their heights'
 		  d3.select("#bar_" + d["name"] + "_" + s["shape"])
 			.transition()
 			.delay(2700)
@@ -90,6 +90,37 @@ var barThickness = height * 0.015; // copied from initiate
 				}
 				return barHeight;
 			});
+		  // transition of the rating label to fade in on their category icon
+		  d3.select("#g_" + d["name"]).append("text")
+			.attr("id", "rating_value_" + d["name"] + "_" + s["shape"])
+			.attr("x", function(){
+			// may have correlating title icon X-Axis position scaling values
+			// yes, this is pulled from initiate which is pulled from above here
+				var segment = barLength + (barLength * 0.07);
+				var offsetX = legendWidth + iconDiameter;
+				var exposeRight = segment * 0.10;
+				var reducedSegment = (segment - (exposeRight * 2));
+				var portion = ((reducedSegment / (titleCount - 1)) * i);
+				return offsetX + portion + (sID * (iconDiameter * 0.50));
+			})
+			.attr("y", function(){
+				var position = s["rating"];
+				position = mapRating(position);
+				if (s["rating"] > 0){
+					position += (catIconD * 2);
+				}
+				return position;
+			})
+			.style("font-size", (iconDiameter * 0.50) + "px")
+			.style("fill", "black") 
+			.attr("stroke", "white")
+			.attr("stroke-width", 0.5)
+			.text(s["rating"])
+			.style("opacity", 0)
+			.transition()
+			.delay(5400)
+			.duration(1000)
+			.style("opacity", 1);
 		});
 	});
 }
