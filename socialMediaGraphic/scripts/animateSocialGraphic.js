@@ -101,7 +101,11 @@ var barThickness = height * 0.015; // copied from initiate
 				var exposeRight = segment * 0.10;
 				var reducedSegment = (segment - (exposeRight * 2));
 				var portion = ((reducedSegment / (titleCount - 1)) * i);
-				return offsetX + portion + (sID * (iconDiameter * 0.50));
+				var posX = offsetX + portion + (sID * (iconDiameter * 0.50));
+				if (s["rating"] >= 0){
+					posX += (catIconD * 0.10);
+				}
+				return posX ;
 			})
 			.attr("y", function(){
 				var position = s["rating"];
@@ -109,9 +113,10 @@ var barThickness = height * 0.015; // copied from initiate
 				if (s["rating"] > 0){
 					position += (catIconD * 2);
 				}
+				position -= (catIconD * 0.25);
 				return position;
 			})
-			.style("font-size", (iconDiameter * 0.50) + "px")
+			.style("font-size", (iconDiameter * 0.45) + "px")
 			.style("fill", "black") 
 			.attr("stroke", "white")
 			.attr("stroke-width", 0.5)
